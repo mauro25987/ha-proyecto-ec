@@ -2,7 +2,9 @@ const Home = () => {
   return (
     <div>
       <nav></nav>
-      <section></section>
+      <section>
+        <h1>pasdlkasdkl</h1>
+      </section>
     </div>
   );
 };

@@ -8,6 +8,9 @@ function Login() {
         <h1>Freedom to Stream</h1>
         <p>All the video content you enjoy in one place</p>
       </div>
+      <form className="login-form">
+        <input type="email" placeholder="Email" required />
+      </form>
     </div>
   );
 }
