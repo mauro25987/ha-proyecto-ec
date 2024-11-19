@@ -27,7 +27,7 @@ const Home = () => {
     <div>
       <nav></nav>
       <section>
-        <h1>pasdlkasdkl</h1>
+        <h1>probando mateo</h1>
       </section>
     </div>
   );
