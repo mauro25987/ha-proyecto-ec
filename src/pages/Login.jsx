@@ -10,6 +10,10 @@ function Login() {
       </div>
       <form className="login-form">
         <input type="email" placeholder="Email" required />
+        <input type="contraseña" placeholder="Contraseña" required/>
+        <input type="contraseña" placeholder="Confirmar Contraseña" required/>
+        <div className="login-checkbox"></div>
+        
       </form>
     </div>
   );

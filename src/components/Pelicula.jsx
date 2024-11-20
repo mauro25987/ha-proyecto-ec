@@ -1,15 +1,17 @@
 const Pelicula = () => {
   return (
-    <div>
-      <h1>Titulo: {}</h1>
+    <div style={{ 
+      backgroundImage: "pelicula.img"
+    }}>
+      <h1>Titulo: {"pelicula.title"}</h1>
       <p>
-        Duracion: {} Año: {} Rating: {} "logo de imdb"
+        Duracion: {"pelicula.duration"} Año: {"pelicula.year"} Rating: {"pelicula.rate"} "logo de imdb"
       </p>
-      <h2>Generos:</h2>
-      <h2>Reparto:</h2>
-      <h2>Directores:</h2>
+      <h2>Generos:{"pelicula.genres"}</h2>
+      <h2>Reparto:{"pelicula.cast"}</h2>
+      <h2>Directores:{"pelicula.directors"}</h2>
       <h2>Descripcion:</h2>
-      <p> {"....."}</p>
+      <p> {"pelicula.description"} </p>
       <div>
         <button>Añadir al carrito</button>
         <button>Trailer</button>
