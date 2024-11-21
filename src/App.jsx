@@ -2,8 +2,8 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom"
 import Layout from "./components/Layout"
 import { About, Cart, Error, Home, Login, Movie, Profile, Register } from "./pages/index"
 
-function App() {
-  const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
     {
       path: "/",
       element: <Layout />,
@@ -18,9 +18,21 @@ function App() {
         { path: "*", element: <Error /> },
       ],
     },
-  ])
+  ],
+  {
+    future: {
+      v7_relativeSplatPath: true,
+      v7_normalizeFormMethod: true,
+      v7_fetcherPersist: true,
+      v7_partialHydration: true,
+      v7_skipActionStatusRevalidation: true,
+      v7_skipActionErrorRevalidation: true,
+    },
+  }
+)
 
-  return <RouterProvider router={router} />
+function App() {
+  return <RouterProvider router={router} future={{ v7_startTransition: true }} />
 }
 
 export default App
