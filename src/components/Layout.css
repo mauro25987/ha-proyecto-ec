@@ -1,0 +1,63 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.navbar-logo img {
+  height: 40px;
+}
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  background-color: rgb(30, 30, 46);
+  height: 60px;
+}
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.main-contain {
+  margin-top: 60px;
+}
+.login-form,
+.login-body {
+  text-align: center;
+}
+body {
+  background-color: rgb(30, 30, 46);
+  color: white;
+}
+
+.movie-image {
+  width: 100%;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.movie-cards {
+  margin: 10px;
+  text-align: center;
+
+  transition: transform 0.2s;
+}
+.movie-title {
+  font-size: 16px;
+  margin-top: 10px;
+  color: white;
+  text-align: center;
+}
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-content: space-around;
+  padding: 20px;
+}

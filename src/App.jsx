@@ -1,10 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Pelicula from "./components/Pelicula";
-import Home from "./components/Home";
-import About from "./components/About";
-import Login from "./pages/Login";
-import Carrito from "./pages/Carrito";
 import Layout from "./components/Layout";
+import { About, Cart, Error, Home, Login, Movie, Profile, Register } from "./pages/index";
 
 function App() {
   const router = createBrowserRouter([
@@ -13,11 +9,12 @@ function App() {
       element: <Layout />,
       children: [
         { index: true, element: <Home /> },
-        { path: "/Pelicula", element: <Pelicula /> },
-        { path: "/Carrito", element: <Carrito /> },
-        { path: "/Login", element: <Login /> },
-        { path: "/About", element: <About /> },
-        { path: "/Layout", element: <Layout /> },
+        { path: "/movie", element: <Movie /> },
+        { path: "/cart", element: <Cart /> },
+        { path: "/login", element: <Login /> },
+        { path: "/register", element: <Register /> },
+        { path: "/profile", element: <Profile /> },
+        { path: "/about", element: <About /> },
         { path: "*", element: <Error /> },
       ],
     },
