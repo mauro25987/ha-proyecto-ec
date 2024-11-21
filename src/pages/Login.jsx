@@ -20,6 +20,16 @@ function Login() {
         <br />
         <button style={{ paddin: "5px", margin: "5px" }}>Sign up</button>
       </div>
+<<<<<<< HEAD
+=======
+      <form className="login-form">
+        <input type="email" placeholder="Email" required />
+        <input type="contraseña" placeholder="Contraseña" required/>
+        <input type="contraseña" placeholder="Confirmar Contraseña" required/>
+        <div className="login-checkbox"></div>
+        
+      </form>
+>>>>>>> bf8df2d60d5c65e65cd3181162df0adba4abfe56
     </div>
   );
 }
