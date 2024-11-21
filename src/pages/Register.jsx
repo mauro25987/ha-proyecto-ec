@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import "../components/Layout.css"
 
 const Register = () => {
   const navigate = useNavigate()
@@ -37,21 +38,20 @@ const Register = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className="main-contain" onSubmit={handleSubmit}>
       Registro de usuario:
-      <div>
+      <div className="form">
         <label htmlFor="firstname">Nombre</label>
         <input
           type="text"
           id="firstname"
           name="firstname"
-          value="test"
-          // value={user.firstname}
+          value={user.firstname}
           onChange={handleUser}
           required
         />
       </div>
-      <div>
+      <div className="form">
         <label htmlFor="lastname">Apellido</label>
         <input
           type="text"
@@ -62,7 +62,7 @@ const Register = () => {
           required
         />
       </div>
-      <div>
+      <div className="form">
         <label htmlFor="address">Direccion</label>
         <input
           type="text"

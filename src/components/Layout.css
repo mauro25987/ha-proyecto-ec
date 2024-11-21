@@ -61,3 +61,7 @@ body {
   justify-content: space-around;
   padding: 20px;
 }
+
+.form {
+  justify-content: center;
+}
