@@ -1,26 +1,61 @@
+import axios from "axios"
+import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 import "../components/Layout.css"
 
 function Login() {
+  const navigate = useNavigate()
+
+  const [user, setUser] = useState({ email: "", password: "" })
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+
+    try {
+      const response = await axios.post("https://ha-videoclub-api-g2.vercel.app/tokens", user, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
+      console.log(response)
+      navigate("/")
+    } catch (error) {
+      console.log("error test", error)
+    }
+  }
+
+  const handleUser = e => {
+    setUser({ ...user, [e.target.name]: e.target.value })
+  }
+
   return (
-    <div className="main-contain">
-      <div className="login-body">
-        <form className="login-form">
-          <h1>Freedom to Stream</h1>
-          <p>All the video content you enjoy in one place</p>
-          <input type="email" placeholder="Email" required />
-        </form>
-        <br />
-        <form className="login-form">
-          <input type="email" placeholder="Password" required />
-        </form>
-        <br />
-        <form className="login-form">
-          <input type="email" placeholder="Confirm Password" required />
-        </form>
-        <br />
-        <button style={{ paddin: "5px", margin: "5px" }}>Sign up</button>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="email"></label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={user.email}
+          onChange={handleUser}
+          required
+        />
       </div>
-    </div>
+      <div>
+        <label htmlFor="password"></label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={user.password}
+          onChange={handleUser}
+          autoComplete="on"
+        />
+      </div>
+      <div>
+        <button>Login</button>
+      </div>
+    </form>
   )
 }
 

@@ -18,6 +18,9 @@ const Layout = () => {
           <NavLink to="login">
             <p>Login</p>
           </NavLink>
+          <NavLink to="register">
+            <p>Registro</p>
+          </NavLink>
         </div>
       </nav>
 

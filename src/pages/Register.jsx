@@ -37,81 +37,80 @@ const Register = () => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        Registro de usuario:
-        <div>
-          <label htmlFor="firstname">Nombre</label>
-          <input
-            type="text"
-            id="firstname"
-            name="firstname"
-            value="test"
-            // value={user.firstname}
-            onChange={handleUser}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="lastname">Apellido</label>
-          <input
-            type="text"
-            id="lastname"
-            name="lastname"
-            value={user.lastname}
-            onChange={handleUser}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="address">Direccion</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            value={user.address}
-            onChange={handleUser}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="phone">Teléfono</label>
-          <input
-            type="number"
-            id="phone"
-            name="phone"
-            value={user.phone}
-            onChange={handleUser}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Correo</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={user.email}
-            onChange={handleUser}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Clave</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={user.password}
-            onChange={handleUser}
-            required
-          />
-        </div>
-        <div>
-          <button>Registrar</button>
-        </div>
-      </form>
-    </div>
+    <form onSubmit={handleSubmit}>
+      Registro de usuario:
+      <div>
+        <label htmlFor="firstname">Nombre</label>
+        <input
+          type="text"
+          id="firstname"
+          name="firstname"
+          value="test"
+          // value={user.firstname}
+          onChange={handleUser}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="lastname">Apellido</label>
+        <input
+          type="text"
+          id="lastname"
+          name="lastname"
+          value={user.lastname}
+          onChange={handleUser}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="address">Direccion</label>
+        <input
+          type="text"
+          id="address"
+          name="address"
+          value={user.address}
+          onChange={handleUser}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="phone">Teléfono</label>
+        <input
+          type="number"
+          id="phone"
+          name="phone"
+          value={user.phone}
+          onChange={handleUser}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="email">Correo</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          value={user.email}
+          onChange={handleUser}
+          required
+        />
+      </div>
+      <div>
+        <label htmlFor="password">Clave</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={user.password}
+          onChange={handleUser}
+          autoComplete="on"
+          required
+        />
+      </div>
+      <div>
+        <button>Registrar</button>
+      </div>
+    </form>
   )
 }
 
