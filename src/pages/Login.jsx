@@ -1,4 +1,4 @@
-import "../components/Layout.css";
+import "../components/Layout.css"
 
 function Login() {
   return (
@@ -21,7 +21,7 @@ function Login() {
         <button style={{ paddin: "5px", margin: "5px" }}>Sign up</button>
       </div>
     </div>
-  );
+  )
 }
 
-export default Login;
+export default Login

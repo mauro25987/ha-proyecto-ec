@@ -3,8 +3,7 @@ const About = () => {
     <div>
       <h1>Sobre este proyecto</h1>
       <p>
-        Creamos un videoclub, como proyecto final del curso de FrontEnd avanzado
-        de Hack Academy
+        Creamos un videoclub, como proyecto final del curso de FrontEnd avanzado de Hack Academy
       </p>
       <h2>Los colaboradores fuimos:</h2>
       <ul>
@@ -15,7 +14,7 @@ const About = () => {
       </ul>
       <p>Las tecnologias usadas fueron react, redux, bootstrap</p>
     </div>
-  );
-};
+  )
+}
 
-export default About;
+export default About

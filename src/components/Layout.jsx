@@ -1,5 +1,5 @@
-import { NavLink, Outlet } from "react-router-dom";
-import "./Layout.css";
+import { NavLink, Outlet } from "react-router-dom"
+import "./Layout.css"
 
 const Layout = () => {
   return (
@@ -25,7 +25,7 @@ const Layout = () => {
 
       <footer></footer>
     </div>
-  );
-};
+  )
+}
 
-export default Layout;
+export default Layout

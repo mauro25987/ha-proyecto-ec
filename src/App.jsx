@@ -1,6 +1,6 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Layout from "./components/Layout";
-import { About, Cart, Error, Home, Login, Movie, Profile, Register } from "./pages/index";
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import Layout from "./components/Layout"
+import { About, Cart, Error, Home, Login, Movie, Profile, Register } from "./pages/index"
 
 function App() {
   const router = createBrowserRouter([
@@ -18,9 +18,9 @@ function App() {
         { path: "*", element: <Error /> },
       ],
     },
-  ]);
+  ])
 
-  return <RouterProvider router={router} />;
+  return <RouterProvider router={router} />
 }
 
-export default App;
+export default App
