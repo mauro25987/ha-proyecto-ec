@@ -8,13 +8,25 @@ const Cart = () => {
   return (
     <div>
       <h1>Carrito</h1>
-
-      <div>
-        <h2>{cart.payload.title}</h2>
-        <img src={cart.payload.image} alt="" />
-      </div>
-
-      {/* {cart.lenght === 0 ? "carrito vacio" : cart.map(movie => <div>movie.id, movie.image</div>)} */}
+      {cart.lenght === 0 ? (
+        <h2>El carrito se encuentra actualmente vacio</h2>
+      ) : (
+        cart.map(movie => (
+          <div>
+            <p>{movie.title}</p>
+            <img
+              style={{
+                height: 300,
+                width: 300,
+              }}
+              src={`https://image.tmdb.org/t/p/original/${movie.image}`}
+              alt=""
+            />
+            <button>Eliminar del carrito</button>
+            <br />
+          </div>
+        ))
+      )}
     </div>
   )
 }
