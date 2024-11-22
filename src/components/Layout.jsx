@@ -1,7 +1,31 @@
+import { useSelector } from "react-redux"
 import { NavLink, Outlet } from "react-router-dom"
 import "./Layout.css"
 
 const Layout = () => {
+  const stateAuthenticated = useSelector(state => state.auth.isAuthenticated)
+
+  const isAuthenticated = (
+    <>
+      <NavLink to="profile">
+        <p>Perfil</p>
+      </NavLink>
+      <NavLink to="logout">
+        <p>Logout</p>
+      </NavLink>
+    </>
+  )
+  const isNotAuthenticated = (
+    <>
+      <NavLink to="login">
+        <p>Login</p>
+      </NavLink>
+      <NavLink to="register">
+        <p>Registro</p>
+      </NavLink>
+    </>
+  )
+
   return (
     <div>
       <nav className="navbar">
@@ -15,12 +39,10 @@ const Layout = () => {
           <NavLink to="about">
             <p>About</p>
           </NavLink>
-          <NavLink to="login">
-            <p>Login</p>
+          <NavLink to="cart">
+            <p>Carrito</p>
           </NavLink>
-          <NavLink to="register">
-            <p>Registro</p>
-          </NavLink>
+          {stateAuthenticated ? isAuthenticated : isNotAuthenticated}
         </div>
       </nav>
 

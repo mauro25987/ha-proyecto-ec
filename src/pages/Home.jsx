@@ -1,10 +1,10 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 const Home = () => {
   const apiKey = import.meta.env.VITE_API_KEY
 
   const [movies, setMovies] = useState([])
-  // const [filteredMovies, setFilteredMovies] = useState([]);
 
   const fetchMovies = () => {
     const options = {
@@ -33,11 +33,14 @@ const Home = () => {
         <div className="movie-list">
           {movies.map(movie => (
             <div key={movie.id} className="movie-cards">
-              <img
-                src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`}
-                alt={movie.title}
-                className="movie-image"
-              />
+              <Link to={`movie/${movie.id}`}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`}
+                  alt={movie.title}
+                  className="movie-image"
+                  style={{ cursor: "pointer" }}
+                />
+              </Link>
               <h2 className="movie-title">{movie.title}</h2>
             </div>
           ))}

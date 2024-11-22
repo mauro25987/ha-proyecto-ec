@@ -38,8 +38,8 @@ const Register = () => {
   }
 
   return (
-    <form className="main-contain" onSubmit={handleSubmit}>
-      Registro de usuario:
+    <form className="form-register" onSubmit={handleSubmit}>
+      <h3 className="form">Registro de usuario:</h3>
       <div className="form">
         <label htmlFor="firstname">Nombre</label>
         <input
@@ -73,7 +73,7 @@ const Register = () => {
           required
         />
       </div>
-      <div>
+      <div className="form">
         <label htmlFor="phone">Teléfono</label>
         <input
           type="number"
@@ -84,7 +84,7 @@ const Register = () => {
           required
         />
       </div>
-      <div>
+      <div className="form">
         <label htmlFor="email">Correo</label>
         <input
           type="email"
@@ -95,7 +95,7 @@ const Register = () => {
           required
         />
       </div>
-      <div>
+      <div className="form">
         <label htmlFor="password">Clave</label>
         <input
           type="password"
@@ -107,7 +107,7 @@ const Register = () => {
           required
         />
       </div>
-      <div>
+      <div className="form">
         <button>Registrar</button>
       </div>
     </form>

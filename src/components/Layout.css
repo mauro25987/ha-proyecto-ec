@@ -15,18 +15,25 @@
   position: fixed;
   top: 0;
   width: 100%;
-  z-index: 1000;
+  z-index: 10;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  background-color: rgb(30, 30, 46);
+  background-color: rgba(30, 30, 46, 0.5);
   height: 60px;
 }
 .navbar-links {
   display: flex;
   gap: 20px;
+  a {
+    color: white;
+    text-decoration: none;
+    &:hover {
+      text-decoration: under;
+    }
+  }
 }
 
 .main-contain {
-  margin-top: 60px;
+  margin-top: 80px;
 }
 .login-form,
 .login-body {
@@ -49,6 +56,9 @@ body {
 
   transition: transform 0.2s;
 }
+.movie-cards:hover {
+  transform: scale(1.05);
+}
 .movie-title {
   font-size: 16px;
   margin-top: 10px;
@@ -62,6 +72,44 @@ body {
   padding: 20px;
 }
 
+.form-register {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 80px;
+}
 .form {
-  justify-content: center;
+  border-radius: 8px;
+  flex-direction: column;
+
+  display: flex;
+  max-width: 400px;
+}
+.log {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  margin-top: 8px;
+}
+
+.content {
+  min-height: 100vh;
+  position: relative;
+  background-size: cover;
+  background-position: 0%;
+  background-repeat: no-repeat;
+
+  color: white;
+}
+.movie-info {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-100%, -50%);
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  border-radius: 10px;
 }
