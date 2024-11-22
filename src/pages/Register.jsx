@@ -1,11 +1,13 @@
 import axios from "axios"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import config from "../api/vercel"
 import "../components/Layout.css"
 
 const Register = () => {
   const navigate = useNavigate()
   //const [response, setResponse] = useState(null)
+  const { urlVercel } = config
 
   const [user, setUser] = useState({
     firstname: "",
@@ -24,17 +26,22 @@ const Register = () => {
     e.preventDefault()
 
     try {
-      const response = await axios.post("https://ha-videoclub-api-g2.vercel.app/users", user, {
+      const response = await axios({
+        method: "POST",
+        baseURL: urlVercel,
+        url: "/users",
         headers: {
           "Content-Type": "application/json",
         },
+        data: user,
       })
-      console.log(response)
+      if (response.status === 200) {
+        console.log(response)
+        navigate("/")
+      }
     } catch (error) {
-      console.log("error test", error)
+      console.log("Error:", error)
     }
-
-    navigate("/")
   }
 
   return (
@@ -115,10 +122,3 @@ const Register = () => {
 }
 
 export default Register
-
-// "firstname": "María",
-// "lastname": "Ortiz",
-// "address": "Yi 2266",
-// "phone": "099776655",
-// "email": "algo@server.com",
-// "password": "abc123"

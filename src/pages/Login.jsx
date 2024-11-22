@@ -2,6 +2,7 @@ import axios from "axios"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
+import config from "../api/vercel"
 import "../components/Layout.css"
 import { setToken } from "../reducer/authSlice"
 
@@ -9,6 +10,7 @@ function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
+  const { urlVercel } = config
   const [user, setUser] = useState({ email: "", password: "" })
   const [error, setError] = useState(null)
 
@@ -16,19 +18,23 @@ function Login() {
     e.preventDefault()
 
     try {
-      const response = await axios.post("https://ha-videoclub-api-g2.vercel.app/tokens", user, {
+      const response = await axios({
+        method: "POST",
+        baseURL: urlVercel,
+        url: "/tokens",
         headers: {
           "Content-Type": "application/json",
         },
+        data: user,
       })
+
       if (response.status === 200) {
-        if (response.data.token) {
-          const token = response.data.token
+        const { token, error } = response.data
+        if (token) {
           dispatch(setToken(token))
-          console.log(token)
           navigate("/")
         } else {
-          setError(response.data.error)
+          setError(error)
         }
       }
     } catch (error) {
