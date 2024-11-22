@@ -9,7 +9,7 @@ export const cartSlice = createSlice({
       state.push({ id, title, image })
     },
     removeItemCart: (state, action) => {
-      return
+      return state.filter(item => item.id !== action.payload)
     },
     editCart: (state, action) => {
       return

@@ -1,28 +1,29 @@
 import { useSelector } from "react-redux"
+import { useDispatch } from "react-redux"
+import { removeItemCart } from "../reducer/cartSlice"
+import "../components/Layout.css"
 
 const Cart = () => {
   const cart = useSelector(state => state.cart)
-  console.log(cart.lenght)
+  console.log(cart.length)
   // llamada a la api privad obtener precio unico de pelicula, multiplico por longitud del array, obtengo precio total
 
+  const dispatch = useDispatch()
+  const handleRemoveFromCart = id => {
+    dispatch(removeItemCart(id))
+  }
+
   return (
-    <div>
-      <h1>Carrito</h1>
-      {cart.lenght === 0 ? (
+    <div className="main-contain">
+      <h1 className="movie-list">Carrito</h1>
+      {cart.length === 0 ? (
         <h2>El carrito se encuentra actualmente vacio</h2>
       ) : (
         cart.map(movie => (
-          <div>
+          <div key={movie.id} className="movie-cards">
             <p>{movie.title}</p>
-            <img
-              style={{
-                height: 300,
-                width: 300,
-              }}
-              src={`https://image.tmdb.org/t/p/original/${movie.image}`}
-              alt=""
-            />
-            <button>Eliminar del carrito</button>
+            <img src={`https://image.tmdb.org/t/p/original/${movie.image}`} alt="" />
+            <button onClick={() => handleRemoveFromCart(movie.id)}>Eliminar del carrito</button>
             <br />
           </div>
         ))
