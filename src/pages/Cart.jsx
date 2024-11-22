@@ -15,19 +15,26 @@ const Cart = () => {
 
   return (
     <div className="main-contain">
-      <h1 className="movie-list">Carrito</h1>
-      {cart.length === 0 ? (
-        <h2>El carrito se encuentra actualmente vacio</h2>
-      ) : (
-        cart.map(movie => (
-          <div key={movie.id} className="movie-cards">
-            <p>{movie.title}</p>
-            <img src={`https://image.tmdb.org/t/p/original/${movie.image}`} alt="" />
-            <button onClick={() => handleRemoveFromCart(movie.id)}>Eliminar del carrito</button>
-            <br />
-          </div>
-        ))
-      )}
+      <h1 className="cart">Carrito</h1>
+      <hr />
+      <div className="movie-list">
+        {cart.length === 0 ? (
+          <h2 className="cart">El carrito se encuentra actualmente vacio</h2>
+        ) : (
+          cart.map(movie => (
+            <div key={movie.id} className="movie-cart">
+              <p>{movie.title}</p>
+              <img
+                src={`https://image.tmdb.org/t/p/original/${movie.image}`}
+                alt=""
+                className="movie-image"
+              />
+              <button onClick={() => handleRemoveFromCart(movie.id)}>Eliminar del carrito</button>
+              <br />
+            </div>
+          ))
+        )}
+      </div>
     </div>
   )
 }

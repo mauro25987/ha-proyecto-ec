@@ -114,6 +114,20 @@ body {
   width: 90%;
 }
 
+.cart {
+  margin-left: 20px;
+}
+
+.movie-cart {
+  margin: 10px;
+  text-align: center;
+
+  transition: transform 0.2s;
+}
+.movie-cart:hover {
+  transform: scale(1.05);
+}
+
 @media (max-width: 1024px) {
   .navbar {
     padding: 10px;
