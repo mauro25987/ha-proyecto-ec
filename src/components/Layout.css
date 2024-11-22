@@ -98,18 +98,51 @@ body {
   min-height: 100vh;
   position: relative;
   background-size: cover;
-  background-position: 0%;
+  background-position: center;
   background-repeat: no-repeat;
-
-  color: white;
 }
 .movie-info {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-100%, -50%);
+  transform: translate(-50%, -50%);
   text-align: center;
-  background: rgba(0, 0, 0, 0.1);
+  background: rgba(0, 0, 0, 0.2);
   padding: 20px;
   border-radius: 10px;
+  max-width: 600px;
+  width: 90%;
+}
+
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 10px;
+  }
+
+  .movie-image {
+    max-width: 250px;
+  }
+
+  .movie-info {
+    width: 90%;
+  }
+
+  .movie-list {
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 15px;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    height: 50px;
+  }
+
+  .movie-image {
+    max-width: 200px;
+  }
+
+  .movie-info {
+    padding: 15px;
+  }
 }

@@ -38,19 +38,17 @@ function Movie() {
   }, [])
 
   return (
-    <div
-      className="content"
-      style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original/${selectedMovie.poster_path})`,
-        
-      }}
-    >
+    <div>
+      <div
+        className="content"
+        style={{
+          backgroundImage: `url(https://image.tmdb.org/t/p/original/${selectedMovie.backdrop_path})`,
+        }}
+      ></div>
       <div className="movie-info">
         <h2
           style={{
             marginTop: "80px",
-
-            
           }}
         >
           {selectedMovie.title}
