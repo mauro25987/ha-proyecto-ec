@@ -9,8 +9,10 @@ const Profile = () => {
 
   const [error, setError] = useState(null)
   const [user, setUser] = useState(null)
+  const [loading, SetLoading] = useState(null)
 
   const fetchProfile = async () => {
+    SetLoading(true)
     try {
       const response = await axios({
         method: "GET",
@@ -36,6 +38,8 @@ const Profile = () => {
       } else {
         setError("Error: Problema de conexion, intente mas tarde")
       }
+    } finally {
+      SetLoading(false)
     }
   }
 
@@ -48,12 +52,17 @@ const Profile = () => {
     return <div>{error}</div>
   }
 
+  if (loading) {
+    return <div>Cargando perfil...</div>
+  }
+
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
       <h1>Perfil</h1>
       <button style={{ padding: "10px 20px", backgroundColor: "", color: "white" }}>
         Editar Perfil
       </button>
+      {console.log(user)}
     </div>
   )
 }
