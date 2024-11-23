@@ -3,11 +3,11 @@ import { NavLink, Outlet } from "react-router-dom"
 import "./Layout.css"
 
 const Layout = () => {
-  const stateAuthenticated = useSelector(state => state.auth.isAuthenticated)
+  const { isAuthenticated, userId } = useSelector(state => state.auth)
 
-  const isAuthenticated = (
+  const isUserAuthenticated = (
     <>
-      <NavLink to="profile">
+      <NavLink to={`profile/${userId}`}>
         <p>Perfil</p>
       </NavLink>
       <NavLink to="logout">
@@ -15,7 +15,8 @@ const Layout = () => {
       </NavLink>
     </>
   )
-  const isNotAuthenticated = (
+
+  const isUserNotAuthenticated = (
     <>
       <NavLink to="login">
         <p>Login</p>
@@ -42,7 +43,7 @@ const Layout = () => {
           <NavLink to="cart">
             <p>Carrito</p>
           </NavLink>
-          {stateAuthenticated ? isAuthenticated : isNotAuthenticated}
+          {isAuthenticated ? isUserAuthenticated : isUserNotAuthenticated}
         </div>
       </nav>
 

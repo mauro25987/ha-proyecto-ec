@@ -29,9 +29,9 @@ function Login() {
       })
 
       if (response.status === 200) {
-        const { token, error } = response.data
-        if (token) {
-          dispatch(setToken(token))
+        const { token, userId, error } = response.data
+        if (token && userId) {
+          dispatch(setToken({ token, userId }))
           navigate("/")
         } else {
           setError(error)
