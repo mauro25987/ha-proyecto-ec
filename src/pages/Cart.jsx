@@ -1,12 +1,30 @@
 import { useSelector } from "react-redux"
 import { useDispatch } from "react-redux"
 import { removeItemCart } from "../reducer/cartSlice"
+import { useState, useEffect } from "react"
+import axios from "axios"
 import "../components/Layout.css"
 
 const Cart = () => {
   const cart = useSelector(state => state.cart)
   console.log(cart.length)
-  // llamada a la api privad obtener precio unico de pelicula, multiplico por longitud del array, obtengo precio total
+  const [price, setPrice] = useState(0)
+
+  useEffect(() => {
+    const fetchPrice = async () => {
+      try {
+        const response = await axios.get("https://ha-videoclub-api-g2.vercel.app/prices", {
+          params: { price_id: 2 },
+        })
+        setPrice(response.data.pricing[1].price)
+      } catch (error) {
+        console.error("Error al obtener el precio:", error)
+      }
+    }
+    fetchPrice()
+  }, [])
+
+  const totalPrice = price * cart.length
 
   const dispatch = useDispatch()
   const handleRemoveFromCart = id => {
@@ -23,7 +41,7 @@ const Cart = () => {
         ) : (
           cart.map(movie => (
             <div key={movie.id} className="movie-cart">
-              <p>{movie.title}</p>
+              <h3>{movie.title}</h3>
               <img
                 src={`https://image.tmdb.org/t/p/original/${movie.image}`}
                 alt=""
@@ -34,6 +52,7 @@ const Cart = () => {
             </div>
           ))
         )}
+        <h4>Precio total: {totalPrice}</h4>
       </div>
     </div>
   )
