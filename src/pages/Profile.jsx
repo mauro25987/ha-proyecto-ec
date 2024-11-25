@@ -59,6 +59,10 @@ const Profile = () => {
   return (
     <div style={{ padding: "20px", textAlign: "center" }}>
       <h1>Perfil</h1>
+      <h2>Nombre: {user.firstname}{user.lastname}</h2>
+      <p>Direccion de correo: {user.adress}</p>
+      <p>Telefono: {user.phone}</p>
+      <p></p>
       <button style={{ padding: "10px 20px", backgroundColor: "", color: "white" }}>
         Editar Perfil
       </button>
