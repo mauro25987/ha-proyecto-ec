@@ -1,9 +1,8 @@
-import { useSelector } from "react-redux"
-import { useDispatch } from "react-redux"
-import { removeItemCart } from "../reducer/cartSlice"
-import { useState, useEffect } from "react"
 import axios from "axios"
+import { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import "../components/Layout.css"
+import { removeItemCart } from "../reducer/cartSlice"
 
 const Cart = () => {
   const cart = useSelector(state => state.cart)
@@ -27,32 +26,34 @@ const Cart = () => {
   const totalPrice = price * cart.length
 
   const dispatch = useDispatch()
-  const handleRemoveFromCart = id => {
-    dispatch(removeItemCart(id))
+  const handleRemoveFromCart = idCart => {
+    dispatch(removeItemCart(idCart))
   }
 
   return (
     <div className="main-contain">
       <h1 className="cart">Carrito</h1>
+      <h4 className="cart">Precio total: {totalPrice}</h4>
       <hr />
       <div className="movie-list">
         {cart.length === 0 ? (
           <h2 className="cart">El carrito se encuentra actualmente vacio</h2>
         ) : (
           cart.map(movie => (
-            <div key={movie.id} className="movie-cart">
+            <div key={movie.idCart} className="movie-cart">
               <h3>{movie.title}</h3>
               <img
                 src={`https://image.tmdb.org/t/p/original/${movie.image}`}
                 alt=""
                 className="movie-image"
               />
-              <button onClick={() => handleRemoveFromCart(movie.id)}>Eliminar del carrito</button>
+              <button onClick={() => handleRemoveFromCart(movie.idCart)}>
+                Eliminar del carrito
+              </button>
               <br />
             </div>
           ))
         )}
-        <h4>Precio total: {totalPrice}</h4>
       </div>
     </div>
   )

@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice, nanoid } from "@reduxjs/toolkit"
 
 export const cartSlice = createSlice({
   name: "cart",
@@ -6,16 +6,13 @@ export const cartSlice = createSlice({
   reducers: {
     addItemCart: (state, action) => {
       const { id, title, image } = action.payload
-      state.push({ id, title, image })
+      state.push({ idCart: nanoid(), id, title, image })
     },
     removeItemCart: (state, action) => {
-      return state.filter(item => item.id !== action.payload)
-    },
-    editCart: (state, action) => {
-      return
+      return state.filter(item => item.idCart !== action.payload)
     },
   },
 })
 
-export const { addItemCart, removeItemCart, editCart } = cartSlice.actions
+export const { addItemCart, removeItemCart } = cartSlice.actions
 export default cartSlice.reducer
