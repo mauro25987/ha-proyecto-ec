@@ -29,7 +29,7 @@ const Home = () => {
   return (
     <div className="main-contain">
       <section>
-        <h2>Popular-Movie</h2>
+        <h2 className="cart">Popular-Movie</h2>
         <div className="movie-list">
           {movies.map(movie => (
             <div key={movie.id} className="movie-cards">

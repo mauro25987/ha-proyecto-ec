@@ -3,10 +3,13 @@ import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import "../components/Layout.css"
 import { removeItemCart } from "../reducer/cartSlice"
+import { Link } from "react-router-dom"
 
 const Cart = () => {
   const cart = useSelector(state => state.cart)
-  console.log(cart.length)
+  const { token, userId } = useSelector(state => state.auth)
+  const auth = useSelector(state => state.auth)
+  const cartItems = useSelector(state => state.cart)
   const [price, setPrice] = useState(0)
 
   useEffect(() => {
@@ -23,17 +26,53 @@ const Cart = () => {
     fetchPrice()
   }, [])
 
-  const totalPrice = price * cart.length
+  const totalPrice = price * cartItems.length
 
   const dispatch = useDispatch()
   const handleRemoveFromCart = idCart => {
     dispatch(removeItemCart(idCart))
   }
 
+  const handleSendOrder = async () => {
+    try {
+      const response = await axios({
+        method: "POST",
+        baseURL: urlVercel,
+        url: `/orders`,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        data: {
+          userId,
+          items: cart.map(item => ({
+            movieId: item.idCart,
+            title: item.title,
+            quantity: 1,
+          })),
+          total: totalPrice,
+          date: new Date().toISOString(),
+        },
+      })
+
+      if (response.status === 200) {
+      }
+    } catch (error) {
+      setError("", error)
+    }
+  }
+
   return (
     <div className="main-contain">
       <h1 className="cart">Carrito</h1>
       <h4 className="cart">Precio total: {totalPrice}</h4>
+      {cartItems.length !== 0 && (
+        <Link to="/order">
+          <button className="cart" onClick={handleSendOrder}>
+            Finalizar compra
+          </button>
+        </Link>
+      )}
       <hr />
       <div className="movie-list">
         {cart.length === 0 ? (

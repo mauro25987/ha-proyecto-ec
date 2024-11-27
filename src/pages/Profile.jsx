@@ -12,6 +12,16 @@ const Profile = () => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
   const [dataForm, setDataForm] = useState({})
+  const [randomBanner, setRandomBanner] = useState("")
+
+  useEffect(() => {
+    const banners = [
+      "https://images.wikidexcdn.net/mwuploads/wikidex/thumb/5/56/latest/20200307023245/Charmander.png/800px-Charmander.png",
+      "https://i.pinimg.com/originals/90/58/3d/90583d6a4aaafaa6567539ec834f3696.png",
+      "https://www.pokemon.com/static-assets/content-assets/cms2/img/pokedex/full/001.png",
+    ]
+    setRandomBanner(banners[Math.floor(Math.random() * banners.length)])
+  }, [])
 
   const handleShowModal = () => {
     setDataForm({ ...user })
@@ -87,17 +97,22 @@ const Profile = () => {
     fetchProfile()
   }, [])
   return (
-    <div style={{ padding: "20px", textAlign: "center" }}>
-      <h1 style={{ marginTop: "60px" }}>Perfil</h1>
+    <div style={{ padding: "20px", textAlign: "center", marginTop: "60px" }}>
+      <img src={randomBanner} className="banner" />
+      <h1>Perfil </h1>
+
       <h2>
-        Nombre: {user?.firstname} {user?.lastname}
+        Bienvenido {user?.firstname} {user?.lastname}{" "}
       </h2>
-      <p>Direccion de correo: {user?.email}</p>
+      <p>Email: {user?.email}</p>
       <p>Telefono: {user?.phone}</p>
       <p></p>
       <button style={{ cursor: "pointer" }} onClick={handleShowModal}>
         Editar Perfil
       </button>
+      <hr />
+
+      <h3>Compras realizadas</h3>
 
       {showModal && (
         <div className="modal-overlay">
