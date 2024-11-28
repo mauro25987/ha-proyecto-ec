@@ -3,6 +3,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 const Order = () => {
   const [orders, setOrder] = useState([])
+  console.log(orders)
   const token = useSelector(state => state.auth.token)
   const urlVercel = "https://ha-videoclub-api-g2.vercel.app"
   const [error, setError] = useState(null)

@@ -4,6 +4,7 @@ import { fetchProfile, updateProfile } from "../api/vercel"
 import ModalProfile from "../components/ModalProfile"
 import randomBanners from "../utils/randomBanner"
 import "./modal.css"
+import "../components/Layout.css"
 
 const Profile = () => {
   const { token, userId } = useSelector(state => state.auth)
