@@ -48,6 +48,7 @@ function Login() {
 
   return (
     <div className="form-register">
+      <h2>Iniciar Sesión</h2>
       <form onSubmit={handleSubmit}>
         <div>
           <label htmlFor="email"></label>
@@ -57,6 +58,7 @@ function Login() {
             name="email"
             value={user.email}
             onChange={handleUser}
+            placeholder= "Email"
             required
           />
         </div>
@@ -68,6 +70,7 @@ function Login() {
             name="password"
             value={user.password}
             onChange={handleUser}
+            placeholder= "Contraseña"
             autoComplete="on"
           />
         </div>

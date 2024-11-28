@@ -1,9 +1,10 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { Link } from "react-router-dom"
+import config from "../api/vercel"
 import "../components/Layout.css"
 import { removeItemCart } from "../reducer/cartSlice"
-import { Link } from "react-router-dom"
 
 const Cart = () => {
   const cart = useSelector(state => state.cart)
@@ -11,6 +12,8 @@ const Cart = () => {
   const auth = useSelector(state => state.auth)
   const cartItems = useSelector(state => state.cart)
   const [price, setPrice] = useState(0)
+  const { urlVercel } = config
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     const fetchPrice = async () => {
@@ -56,6 +59,7 @@ const Cart = () => {
       })
 
       if (response.status === 200) {
+        console.log(response)
       }
     } catch (error) {
       setError("", error)

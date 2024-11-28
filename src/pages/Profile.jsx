@@ -11,8 +11,8 @@ const Profile = () => {
   const [error, setError] = useState(null)
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [dataForm, setDataForm] = useState({})
   const [randomBanner, setRandomBanner] = useState("")
+  const [password, setPassword] = useState("")
 
   useEffect(() => {
     const banners = [
@@ -23,13 +23,20 @@ const Profile = () => {
     setRandomBanner(banners[Math.floor(Math.random() * banners.length)])
   }, [])
 
-  const handleShowModal = () => {
-    setDataForm({ ...user })
-    setShowModal(true)
-  }
   const handleChange = e => {
     const { name, value } = e.target
-    setDataForm(prev => ({ ...prev, [name]: value }))
+    setUser({ ...user, [name]: value })
+  }
+
+  const handleSubmitModal = e => {
+    e.preventDefault()
+    // if(e.target.password !== "")
+    //   setUser(...user, password: e.target.value)
+    console.log("password", password)
+    if (password !== "") setUser({ ...user, password })
+    console.log(user)
+    handleSaveProfile()
+    setShowModal(!showModal)
   }
 
   const handleSaveProfile = async () => {
@@ -42,12 +49,11 @@ const Profile = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data: dataForm,
+        data: user,
       })
 
       if (response.status === 200) {
-        setUser(response.data)
-        setShowModal(false)
+        console.log("usuario actualizado correctamente")
       }
     } catch (error) {
       setError("Error al actualizar el perfil. Intente nuevamente.", error)
@@ -67,9 +73,8 @@ const Profile = () => {
         },
       })
       if (response.status === 200) {
-        const { address, createdAt, email, firstname, lastname, orders, phone, updateAt } =
-          response.data
-        setUser({ address, createdAt, email, firstname, lastname, orders, phone, updateAt })
+        const { address, email, firstname, lastname, orders, phone } = response.data
+        setUser({ address, email, firstname, lastname, orders, phone })
       }
     } catch (error) {
       if (error.response) {
@@ -84,86 +89,117 @@ const Profile = () => {
     } finally {
       setLoading(false)
     }
-
-    if (error) {
-      return <div>{error}</div>
-    }
-
-    if (loading) {
-      return <div>Cargando perfil...</div>
-    }
   }
+
   useEffect(() => {
     fetchProfile()
   }, [])
+
+  if (error) {
+    return <div>{error}</div>
+  }
+
+  if (loading) {
+    return <div>Cargando perfil...</div>
+  }
+
   return (
     <div style={{ padding: "20px", textAlign: "center", marginTop: "60px" }}>
       <img src={randomBanner} className="banner" />
       <h1>Perfil </h1>
-
       <h2>
-        Bienvenido {user?.firstname} {user?.lastname}{" "}
+        Bienvenido {user.firstname} {user.lastname}{" "}
       </h2>
-      <p>Email: {user?.email}</p>
-      <p>Telefono: {user?.phone}</p>
-      <p></p>
-      <button style={{ cursor: "pointer" }} onClick={handleShowModal}>
+      <p>Email: {user.email}</p>
+      <p>Telefono: {user.phone}</p>
+      <p>Direccion: {user.address}</p>
+      <button style={{ cursor: "pointer" }} onClick={() => setShowModal(!showModal)}>
         Editar Perfil
       </button>
       <hr />
-
       <h3>Compras realizadas</h3>
 
       {showModal && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <span className="cancel-button" onClick={() => setShowModal(false)}>
-              &times;
-            </span>
-            <h2>Editar perfil:</h2>
-            <div className="form-group">
-              <input
-                type="text"
-                name="firstname"
-                value={dataForm.firstname || ""}
-                onChange={handleChange}
-                placeholder="Nombre"
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="lastname"
-                value={dataForm.lastname || ""}
-                onChange={handleChange}
-                placeholder="Apellido"
-              />{" "}
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="phone"
-                value={dataForm.phone || ""}
-                onChange={handleChange}
-                placeholder="Numero"
-              />
-            </div>
-            <div className="form-group">
-              <input
-                type="text"
-                name="email"
-                value={dataForm.email || ""}
-                onChange={handleChange}
-                placeholder="Email"
-              />
-            </div>
-            <div className="modal-actions">
-              <button className="save-button" onClick={handleSaveProfile}>
-                Guardar
-              </button>
+        <form onSubmit={handleSubmitModal}>
+          <div className="modal-overlay">
+            <div className="modal-content">
+              <span className="cancel-button" onClick={() => setShowModal(!showModal)}>
+                &times;
+              </span>
+              <h2>Editar perfil:</h2>
+              <div className="form-group">
+                <label htmlFor="firstname">Nombre:</label>
+                <input
+                  type="text"
+                  id="firstname"
+                  name="firstname"
+                  value={user.firstname}
+                  onChange={handleChange}
+                  placeholder="Nombre"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="lastname">Apellido:</label>
+                <input
+                  type="text"
+                  id="lastname"
+                  name="lastname"
+                  value={user.lastname}
+                  onChange={handleChange}
+                  placeholder="Apellido"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="password"> Clave:</label>
+                <input
+                  type="password"
+                  id="password"
+                  name="password"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  placeholder="Ingrese un nuevo password si desea"
+                  autoComplete="on"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone"> Teléfono:</label>
+                <input
+                  type="number"
+                  id="phone"
+                  name="phone"
+                  value={user.phone}
+                  onChange={handleChange}
+                  placeholder="Numero"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="email">Email:</label>
+                <input
+                  type="text"
+                  id="email"
+                  name="email"
+                  value={user.email}
+                  onChange={handleChange}
+                  placeholder="Email"
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="address">Direccion:</label>
+                <input
+                  type="text"
+                  id="address"
+                  name="address"
+                  value={user.address}
+                  onChange={handleChange}
+                  placeholder="Dirección"
+                />
+              </div>
+              <div className="modal-actions">
+                <button className="save-button">Guardar</button>
+              </div>
             </div>
           </div>
-        </div>
+        </form>
       )}
     </div>
   )

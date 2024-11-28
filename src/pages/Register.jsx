@@ -46,7 +46,7 @@ const Register = () => {
 
   return (
     <form className="form-register" onSubmit={handleSubmit}>
-      <h3 className="form">Registro de usuario:</h3>
+      <h3 className="form">Registro de usuario</h3>
       <div className="form">
         <label htmlFor="firstname">Nombre</label>
         <input
@@ -55,6 +55,7 @@ const Register = () => {
           name="firstname"
           value={user.firstname}
           onChange={handleUser}
+          placeholder="María"
           required
         />
       </div>
@@ -66,17 +67,19 @@ const Register = () => {
           name="lastname"
           value={user.lastname}
           onChange={handleUser}
+          placeholder="Pérez"
           required
         />
       </div>
       <div className="form">
-        <label htmlFor="address">Direccion</label>
+        <label htmlFor="address">Dirección</label>
         <input
           type="text"
           id="address"
           name="address"
           value={user.address}
           onChange={handleUser}
+          placeholder="Avenida Brasil"
           required
         />
       </div>
@@ -92,18 +95,19 @@ const Register = () => {
         />
       </div>
       <div className="form">
-        <label htmlFor="email">Correo</label>
+        <label htmlFor="email">Correo Electrónico</label>
         <input
           type="email"
           id="email"
           name="email"
           value={user.email}
           onChange={handleUser}
+          placeholder="example@gmail.com"
           required
         />
       </div>
       <div className="form">
-        <label htmlFor="password">Clave</label>
+        <label htmlFor="password">Contraseña</label>
         <input
           type="password"
           id="password"
@@ -111,11 +115,12 @@ const Register = () => {
           value={user.password}
           onChange={handleUser}
           autoComplete="on"
+          placeholder="contraseña"
           required
         />
       </div>
       <div className="form">
-        <button>Registrar</button>
+        <button>Registrarse</button>
       </div>
     </form>
   )

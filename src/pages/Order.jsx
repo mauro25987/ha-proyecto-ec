@@ -1,10 +1,11 @@
-import { useState, useEffect } from "react"
 import axios from "axios"
+import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 const Order = () => {
   const [orders, setOrder] = useState([])
   const token = useSelector(state => state.auth.token)
   const urlVercel = "https://ha-videoclub-api-g2.vercel.app"
+  const [error, setError] = useState(null)
 
   const handleRecieveOrder = async () => {
     try {
@@ -16,14 +17,13 @@ const Order = () => {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
-        data: cart,
       })
-
       if (response.status === 200) {
+        console.log(response)
         setOrder(response.data.orders)
       }
     } catch (error) {
-      setError("", error)
+      setError("No se han recibido los datos de la orden con exito", error)
     }
   }
 
