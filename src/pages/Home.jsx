@@ -34,7 +34,6 @@ const Home = () => {
 
   return (
     <div className="main-contain">
-      {console.log(movies.popular)}
       <section>
         <h2 className="cart">Peliculas Populares</h2>
         <div className="movie-list">
