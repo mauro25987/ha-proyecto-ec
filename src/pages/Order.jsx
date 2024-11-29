@@ -1,57 +1,56 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
+import config from "../api/vercel"
+
 const Order = () => {
-  const [orders, setOrder] = useState([])
-  console.log(orders)
-  const token = useSelector(state => state.auth.token)
-  const urlVercel = "https://ha-videoclub-api-g2.vercel.app"
+  const [orders, setOrders] = useState([])
+  const { token } = useSelector(state => state.auth)
+  const { urlVercel } = config
   const [error, setError] = useState(null)
 
-  const handleRecieveOrder = async () => {
+  const fetchOrders = async () => {
     try {
-      const response = await axios({
-        method: "GET",
-        baseURL: urlVercel,
-        url: `/orders`,
+      const response = await axios.get(`${urlVercel}/orders`, {
         headers: {
           "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       })
-      if (response.status === 200) {
-        console.log(response)
-        setOrder(response.data.orders)
+      if (response.data) {
+        setOrders(response.data)
       }
     } catch (error) {
-      setError("No se han recibido los datos de la orden con exito", error)
+      console.error("Error al recibir las órdenes:", error)
+      setError("No se han recibido los datos de la orden con éxito.")
     }
   }
+  console.log(orders)
 
   useEffect(() => {
-    handleRecieveOrder()
-  }, [])
+    fetchOrders()
+  }, [urlVercel, token])
 
   return (
     <div>
-      <h1>Órdenes:</h1>
-      <div>
-        {orders.map(order => (
-          <div key={order.id}>
-            <h3>Orden #{order.id}</h3>
-            <p>Fecha: {new Date(order.date).toLocaleDateString()}</p>
-            <p>Total: ${order.total}</p>
+      <h1>Órdenes</h1>
+      {error && <p className="error">{error}</p>}
+      {orders.length === 0 ? (
+        <p>No hay órdenes disponibles</p>
+      ) : (
+        orders.map(order => (
+          <div key={order.order_id}>
+            <h3>Orden #{order.order_id}</h3>
+            <p>Fecha: {new Date(order.createdAt).toLocaleDateString()}</p>
             <h4>Películas:</h4>
             <ul>
-              {order.items.map(item => (
-                <li key={item.movieId}>
-                  {item.title} - Cantidad: {item.quantity}
-                </li>
+              {order.data.map(movie => (
+                <li key={movie.movie_id}>{movie.title || "Título no disponible"}</li>
               ))}
             </ul>
           </div>
-        ))}
-      </div>
+        ))
+      )}
     </div>
   )
 }

@@ -14,39 +14,11 @@
 }
 
 .navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
   position: fixed;
   top: 0;
   width: 100%;
   z-index: 10;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-  background-color: rgba(30, 30, 46, 0.9);
-  height: 60px;
-}
-.navbar-links {
-  display: flex;
-  gap: 20px;
-  font-size: 1rem;
-  font-weight: 500;
-  transition:
-    color 0.3s ease,
-    transform 0.3s ease;
-  a {
-    align-items: center;
-    color: white;
-    text-decoration: none;
-    &:hover {
-      text-decoration: under;
-    }
-  }
-}
-
-.navbar-links a:hover {
-  color: #5e81f4;
-  transform: translateY(-2px);
 }
 
 .main-contain {
@@ -369,4 +341,8 @@ body {
   .card-container {
     grid-template-columns: repeat(1, 1fr);
   }
+}
+.button {
+  background-color: yellow;
+  padding: 5px;
 }

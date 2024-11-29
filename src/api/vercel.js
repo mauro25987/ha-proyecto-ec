@@ -6,6 +6,51 @@ const config = {
 
 const urlVercel = "https://ha-videoclub-api-g2.vercel.app"
 
+const registerUser = async user => {
+  try {
+    const response = await axios({
+      method: "POST",
+      baseURL: urlVercel,
+      url: "/users",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: user,
+    })
+    if (response.status === 200) {
+      if (response.data.error) {
+        return { data: null, error: "El mail ya esta registrado" }
+      }
+      return { data: "Usuario registrado correctamente", error: null }
+    }
+  } catch (error) {
+    return { error: "Error: algo salio mal", data: null }
+  }
+}
+
+const loginUser = async user => {
+  try {
+    const response = await axios({
+      method: "POST",
+      baseURL: urlVercel,
+      url: "/tokens",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      data: user,
+    })
+    if (response.status === 200) {
+      if (response.data.error) {
+        return { data: null, error: "Credenciales invalidas" }
+      }
+      const { token, userId } = response.data
+      return { data: { token, userId }, error: null }
+    }
+  } catch (error) {
+    return { error: "Error: algo salio mal", data: null }
+  }
+}
+
 const fetchProfile = async (token, userId) => {
   try {
     const response = await axios({
@@ -56,5 +101,5 @@ const updateProfile = async (token, userId, user) => {
   }
 }
 
-export { fetchProfile, updateProfile }
+export { loginUser, fetchProfile, updateProfile, registerUser }
 export default config

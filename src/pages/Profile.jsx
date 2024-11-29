@@ -21,8 +21,6 @@ const Profile = () => {
 
   const handleSubmitModal = e => {
     e.preventDefault()
-    // if(e.target.password !== "")
-    //   setUser(...user, password: e.target.value)
     console.log("password", password)
     if (password !== "") setUser({ ...user, password })
     console.log(user)
@@ -57,10 +55,6 @@ const Profile = () => {
     handleFetchProfile()
   }, [])
 
-  if (error) {
-    return <div>{error}</div>
-  }
-
   if (loading) {
     return <div>Cargando perfil...</div>
   }
@@ -91,6 +85,7 @@ const Profile = () => {
           setPassword={setPassword}
         />
       )}
+      {error && <div>{error}</div>}
     </div>
   )
 }

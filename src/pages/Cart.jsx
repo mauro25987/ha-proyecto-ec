@@ -57,6 +57,7 @@ const Cart = () => {
           date: new Date().toISOString(),
         },
       })
+      console.log(data)
 
       if (response.status === 200) {
         console.log(response)
@@ -90,7 +91,7 @@ const Cart = () => {
                 alt=""
                 className="movie-image"
               />
-              <button onClick={() => handleRemoveFromCart(movie.idCart)}>
+              <button className="button" onClick={() => handleRemoveFromCart(movie.idCart)}>
                 Eliminar del carrito
               </button>
               <br />

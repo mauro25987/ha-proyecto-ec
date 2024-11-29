@@ -1,49 +1,38 @@
-import axios from "axios"
 import { useState } from "react"
 import { useDispatch } from "react-redux"
 import { useNavigate } from "react-router-dom"
-import config from "../api/vercel"
 import "../components/Layout.css"
 import { setToken } from "../reducer/authSlice"
+import { loginUser } from "../api/vercel"
 
 function Login() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  const { urlVercel } = config
+  const [loading, setLoading] = useState(false)
   const [user, setUser] = useState({ email: "", password: "" })
   const [error, setError] = useState(null)
 
-  const handleSubmit = async e => {
-    e.preventDefault()
-
-    try {
-      const response = await axios({
-        method: "POST",
-        baseURL: urlVercel,
-        url: "/tokens",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        data: user,
-      })
-
-      if (response.status === 200) {
-        const { token, userId, error } = response.data
-        if (token && userId) {
-          dispatch(setToken({ token, userId }))
-          navigate("/")
-        } else {
-          setError(error)
-        }
-      }
-    } catch (error) {
-      console.log("Error:", error)
-    }
-  }
-
   const handleUser = e => {
     setUser({ ...user, [e.target.name]: e.target.value })
+  }
+
+  const handleSubmit = async e => {
+    e.preventDefault()
+    setLoading(true)
+    const { data, error } = await loginUser(user)
+    if (data) {
+      const { token, userId } = data
+      dispatch(setToken({ token, userId }))
+      navigate("/")
+    }
+    if (error) {
+      setError(error)
+    }
+    setLoading(false)
+  }
+
+  if (loading) {
+    return <div>Logeando usuario</div>
   }
 
   return (
@@ -58,7 +47,7 @@ function Login() {
             name="email"
             value={user.email}
             onChange={handleUser}
-            placeholder= "Email"
+            placeholder="Email"
             required
           />
         </div>
@@ -70,7 +59,7 @@ function Login() {
             name="password"
             value={user.password}
             onChange={handleUser}
-            placeholder= "Contraseña"
+            placeholder="Contraseña"
             autoComplete="on"
           />
         </div>

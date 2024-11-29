@@ -1,6 +1,7 @@
 import axios from "axios"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
+import { FaShoppingCart } from "react-icons/fa"
 const Home = () => {
   const apiKey = import.meta.env.VITE_API_KEY
 
@@ -33,6 +34,7 @@ const Home = () => {
         <div className="movie-list">
           {movies.map(movie => (
             <div key={movie.id} className="movie-cards">
+              <h2 className="movie-title">{movie.title}</h2>
               <Link to={`movie/${movie.id}`}>
                 <img
                   src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`}
@@ -41,7 +43,6 @@ const Home = () => {
                   style={{ cursor: "pointer" }}
                 />
               </Link>
-              <h2 className="movie-title">{movie.title}</h2>
             </div>
           ))}
         </div>
