@@ -1,11 +1,14 @@
 import { useSelector } from "react-redux"
 import { NavLink, Outlet } from "react-router-dom"
 import { Navbar, Nav, Container } from "react-bootstrap"
+import { FaShoppingCart } from "react-icons/fa"
 
 import "./Layout.css"
 
 const Layout = () => {
   const { isAuthenticated, userId } = useSelector(state => state.auth)
+
+  const cartCount = useSelector(state => state.cart.length)
 
   const isUserAuthenticated = (
     <>
@@ -57,7 +60,8 @@ const Layout = () => {
               </li>
               <li className="nav-item">
                 <Nav.Link as={NavLink} to="cart">
-                  Carrito
+                  <FaShoppingCart />
+                  {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
                 </Nav.Link>
               </li>
               <li className="nav-item dropdown">
@@ -94,41 +98,3 @@ const Layout = () => {
 }
 
 export default Layout
-
-{
-  /* <Navbar className="navbar" variant="dark" expand="lg">
-        <Container>
-          <Navbar.Brand href="/">
-            <img
-              src="https://stremio.github.io/stremio-addon-guide/img/favicon.png"
-              alt="Logo"
-              width="30"
-              height="30"
-              className="d-inline-block align-top"
-            />{" "}
-            Mi App
-          </Navbar.Brand>
-
-          <Navbar.Toggle aria-controls="basic-navbar-nav" />
-          <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-              <Nav.Link as={NavLink} to="/">
-                Home
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/about">
-                About
-              </Nav.Link>
-              <Nav.Link as={NavLink} to="/cart">
-                Carrito
-              </Nav.Link>
-
-              {isAuthenticated ? (
-                <Nav.Link>{isUserAuthenticated}</Nav.Link>
-              ) : (
-                <Nav.Link>{isUserNotAuthenticated}</Nav.Link>
-              )}
-            </Nav>
-          </Navbar.Collapse>
-        </Container>
-      </Navbar> */
-}

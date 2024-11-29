@@ -1,7 +1,23 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { FaShoppingCart } from "react-icons/fa"
+import { addItemCart } from "../reducer/cartSlice"
+import { useDispatch } from "react-redux"
 
 const MovieCard = ({ movie }) => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { title, id, poster_path } = movie
+  const handleAddCart = () => {
+    dispatch(
+      addItemCart({
+        id: movie.id,
+        title: movie.title,
+        image: movie.poster_path,
+      })
+    )
+    navigate("/")
+  }
+
   return (
     <div className="movie-cards">
       <h2 className="movie-title">{title}</h2>
@@ -13,6 +29,11 @@ const MovieCard = ({ movie }) => {
           style={{ cursor: "pointer" }}
         />
       </Link>
+
+      <button className="cart-home" onClick={handleAddCart}>
+        Añadir al carrito
+        <FaShoppingCart />
+      </button>
     </div>
   )
 }
