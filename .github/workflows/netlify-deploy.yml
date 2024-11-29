@@ -15,7 +15,7 @@ jobs:
 
       - name: Build the project
         run: |
-          echo "VITE_MOVIE_API_KEY=${{ secrets.MOVIE_API_KEY }}" > .env
+          echo "VITE_API_KEY=${{ secrets.VITE_API_KEY }}" > .env
           npm install
           npm run build
 
