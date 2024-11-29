@@ -4,7 +4,7 @@ import MovieCard from "../components/MovieCard"
 // import { FaShoppingCart } from "react-icons/fa"
 const Home = () => {
   const [movies, setMovies] = useState([])
-  const [error, setError] = useState("")
+  const [error, setError] = useState(null)
   const [loading, setLoading] = useState(false)
 
   const handleFetchMovie = async () => {

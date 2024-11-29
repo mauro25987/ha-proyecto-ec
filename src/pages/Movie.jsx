@@ -1,15 +1,16 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
 import { useDispatch } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
+import { fetchMovie } from "../api/tmdb"
 import { addItemCart } from "../reducer/cartSlice"
 
 function Movie() {
-  const apiKey = import.meta.env.VITE_API_KEY
-
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { id } = useParams()
-  const [selectedMovie, setSelectedMovie] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const [selectedMovie, setSelectedMovie] = useState({})
 
   const handleAddCart = () => {
     dispatch(
@@ -19,23 +20,30 @@ function Movie() {
         image: selectedMovie.poster_path,
       })
     )
+    navigate("/")
+  }
+
+  const handleFetchMovie = async () => {
+    setLoading(true)
+    const { data, error } = await fetchMovie(id)
+    if (data) {
+      const { release_date, title, overview, backdrop_path, poster_path } = data
+      setSelectedMovie({ id, title, release_date, overview, backdrop_path, poster_path })
+      console.log(data)
+    }
+    if (error) {
+      setError(error)
+    }
+    setLoading(false)
   }
 
   useEffect(() => {
-    const options = {
-      method: "GET",
-      url: `https://api.themoviedb.org/3/movie/${id}`,
-      params: { language: "en-US" },
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-    }
-    axios
-      .request(options)
-      .then(res => setSelectedMovie(res.data))
-      .catch(err => console.error(err))
+    handleFetchMovie()
   }, [])
+
+  if (loading) {
+    return <div>Cargando pelicula...</div>
+  }
 
   return (
     <div>
@@ -60,6 +68,7 @@ function Movie() {
           Añadir al carrito
         </button>
       </div>
+      {error && <div>{error}</div>}
     </div>
   )
 }
