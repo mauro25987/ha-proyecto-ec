@@ -74,7 +74,7 @@ const fetchMovie = async id => {
   try {
     const response = await axios({
       method: "GET",
-      url: `${urlTmdb}/movie/${id}`,
+      url: `${urlTmdb}/${id}`,
       params: { language: "en-US" },
       headers: {
         accept: "application/json",

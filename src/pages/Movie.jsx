@@ -29,7 +29,6 @@ function Movie() {
     if (data) {
       const { release_date, title, overview, backdrop_path, poster_path } = data
       setSelectedMovie({ id, title, release_date, overview, backdrop_path, poster_path })
-      console.log(data)
     }
     if (error) {
       setError(error)
