@@ -24,7 +24,9 @@ const registerUser = async user => {
       return { data: "Usuario registrado correctamente", error: null }
     }
   } catch (error) {
-    return { error: "Error: algo salio mal", data: null }
+    if (error.response) {
+      return { error: "Error: algo salio mal", data: null }
+    }
   }
 }
 
@@ -47,7 +49,9 @@ const loginUser = async user => {
       return { data: { token, userId }, error: null }
     }
   } catch (error) {
-    return { error: "Error: algo salio mal", data: null }
+    if (error.response) {
+      return { error: "Error: algo salio mal", data: null }
+    }
   }
 }
 
@@ -101,5 +105,5 @@ const updateProfile = async (token, userId, user) => {
   }
 }
 
-export { loginUser, fetchProfile, updateProfile, registerUser }
+export { fetchProfile, loginUser, registerUser, updateProfile }
 export default config

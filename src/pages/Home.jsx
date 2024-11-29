@@ -1,31 +1,31 @@
-import axios from "axios"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
-import { FaShoppingCart } from "react-icons/fa"
+import { fetchMovies } from "../api/tmdb"
+import MovieCard from "../components/MovieCard"
+// import { FaShoppingCart } from "react-icons/fa"
 const Home = () => {
-  const apiKey = import.meta.env.VITE_API_KEY
-
   const [movies, setMovies] = useState([])
+  const [error, setError] = useState("")
+  const [loading, setLoading] = useState(false)
 
-  const fetchMovies = () => {
-    const options = {
-      method: "GET",
-      url: "https://api.themoviedb.org/3/movie/popular",
-      params: { language: "en-US", page: "1" },
-      headers: {
-        accept: "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
+  const handleFetchMovie = async () => {
+    setLoading(true)
+    const { data, error } = await fetchMovies()
+    if (data) {
+      setMovies(data)
     }
-    axios
-      .request(options)
-      .then(res => setMovies(res.data.results))
-      .catch(err => console.error(err))
+    if (error) {
+      setError(error)
+    }
+    setLoading(false)
   }
 
   useEffect(() => {
-    fetchMovies()
+    handleFetchMovie()
   }, [])
+
+  if (loading) {
+    return <div>Cargando peliculas...</div>
+  }
 
   return (
     <div className="main-contain">
@@ -33,20 +33,11 @@ const Home = () => {
         <h2 className="cart">Popular-Movie</h2>
         <div className="movie-list">
           {movies.map(movie => (
-            <div key={movie.id} className="movie-cards">
-              <h2 className="movie-title">{movie.title}</h2>
-              <Link to={`movie/${movie.id}`}>
-                <img
-                  src={`https://image.tmdb.org/t/p/w300_and_h450_bestv2/${movie.poster_path}`}
-                  alt={movie.title}
-                  className="movie-image"
-                  style={{ cursor: "pointer" }}
-                />
-              </Link>
-            </div>
+            <MovieCard movie={movie} key={movie.id} />
           ))}
         </div>
       </section>
+      {error && <div>{error}</div>}
     </div>
   )
 }

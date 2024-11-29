@@ -44,7 +44,7 @@ const ModalProfile = ({
               id="password"
               name="password"
               value={password}
-              onChange={e => setPassword(e.target.value)}
+              onChange={handleChange}
               placeholder="Ingrese un nuevo password si desea"
               autoComplete="on"
             />

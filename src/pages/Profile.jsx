@@ -1,18 +1,17 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { fetchProfile, updateProfile } from "../api/vercel"
+import "../components/Layout.css"
 import ModalProfile from "../components/ModalProfile"
 import randomBanners from "../utils/randomBanner"
 import "./modal.css"
-import "../components/Layout.css"
 
 const Profile = () => {
   const { token, userId } = useSelector(state => state.auth)
   const [showModal, setShowModal] = useState(false)
   const [error, setError] = useState(null)
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState({})
   const [loading, setLoading] = useState(true)
-  const [password, setPassword] = useState("")
 
   const handleChange = e => {
     const { name, value } = e.target
@@ -21,9 +20,13 @@ const Profile = () => {
 
   const handleSubmitModal = e => {
     e.preventDefault()
-    console.log("password", password)
-    if (password !== "") setUser({ ...user, password })
-    console.log(user)
+    const { firstname, lastname, password, phone, email, address } = user
+    if (password === "") {
+      setUser({ firstname, lastname, phone, email, address })
+      console.log(user)
+    } else {
+      setUser({ firstname, lastname, password, phone, email, address })
+    }
     handleUpdateProfile()
     setShowModal(!showModal)
   }
@@ -43,7 +46,6 @@ const Profile = () => {
   const handleFetchProfile = async () => {
     setLoading(true)
     const { data, error } = await fetchProfile(token, userId)
-    console.log(data)
     if (data) {
       setUser(data)
     }
@@ -82,7 +84,6 @@ const Profile = () => {
           user={user}
           setShowModal={setShowModal}
           showModal={showModal}
-          setPassword={setPassword}
         />
       )}
       {error && <div>{error}</div>}
