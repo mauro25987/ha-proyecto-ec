@@ -55,6 +55,27 @@ const loginUser = async user => {
   }
 }
 
+const deleteUser = async (token, userId) => {
+  try {
+    const response = await axios({
+      method: "DELETE",
+      baseURL: urlVercel,
+      url: `/users/${userId}`,
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    })
+    if (response.status === 200) {
+      return { data: "Usuario borrado correctamente", error: null }
+    }
+  } catch (error) {
+    if (error.response) {
+      return { error: "Error: algo salio mal", data: null }
+    }
+  }
+}
+
 const fetchProfile = async (token, userId) => {
   try {
     const response = await axios({
@@ -147,5 +168,5 @@ const sendOrder = async (token, data) => {
   }
 }
 
-export { fetchPrice, fetchProfile, loginUser, registerUser, sendOrder, updateProfile }
+export { deleteUser, fetchPrice, fetchProfile, loginUser, registerUser, sendOrder, updateProfile }
 export default config

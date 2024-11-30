@@ -1,13 +1,6 @@
 import { useState } from "react"
 
-const ModalProfile = ({
-  handleSubmitModal,
-  handleChange,
-  user,
-  setShowModal,
-  showModal,
-  setPassword,
-}) => {
+const ModalProfile = ({ handleSubmitModal, handleChange, user, setShowModal, showModal }) => {
   const [passwordIsChecked, setPasswordIsChecked] = useState(false)
   const { firstname, lastname, password, phone, email, address } = user
 
@@ -101,6 +94,9 @@ const ModalProfile = ({
               onChange={handleChange}
               placeholder="Dirección"
             />
+          </div>
+          <div className="modal-actions">
+            <button className="save-button">Borrar Usuario</button>
           </div>
           <div className="modal-actions">
             <button className="save-button">Guardar</button>
