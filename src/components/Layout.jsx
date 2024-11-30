@@ -1,13 +1,12 @@
+import { Nav, Navbar } from "react-bootstrap"
+import { FaShoppingCart } from "react-icons/fa"
 import { useSelector } from "react-redux"
 import { NavLink, Outlet } from "react-router-dom"
-import { Navbar, Nav, Container } from "react-bootstrap"
-import { FaShoppingCart } from "react-icons/fa"
 
 import "./Layout.css"
 
 const Layout = () => {
   const { isAuthenticated, userId } = useSelector(state => state.auth)
-
   const cartCount = useSelector(state => state.cart.length)
 
   const isUserAuthenticated = (

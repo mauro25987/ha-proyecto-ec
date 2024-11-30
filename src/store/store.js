@@ -1,5 +1,4 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit"
-import { useSelector } from "react-redux"
 import {
   FLUSH,
   PAUSE,
@@ -20,7 +19,6 @@ const persistConfig = {
 }
 
 const rootReducer = combineReducers({ auth: authReducer, cart: cartReducer })
-const selectCartCount = (state) => state.cart.items.length
 const persistedReducer = persistReducer(persistConfig, rootReducer)
 
 const store = configureStore({

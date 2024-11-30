@@ -1,3 +1,5 @@
+import { useState } from "react"
+
 const ModalProfile = ({
   handleSubmitModal,
   handleChange,
@@ -6,7 +8,13 @@ const ModalProfile = ({
   showModal,
   setPassword,
 }) => {
+  const [passwordIsChecked, setPasswordIsChecked] = useState(false)
   const { firstname, lastname, password, phone, email, address } = user
+
+  const handlePasswordIsChecked = () => {
+    setPasswordIsChecked(!passwordIsChecked)
+  }
+
   return (
     <form onSubmit={handleSubmitModal}>
       <div className="modal-overlay">
@@ -38,6 +46,16 @@ const ModalProfile = ({
             />
           </div>
           <div className="form-group">
+            <div>
+              <label htmlFor="checkbox">Cambiar Clave:</label>
+              <input
+                type="checkbox"
+                id="checkbox"
+                name="checkbox"
+                checked={passwordIsChecked}
+                onChange={handlePasswordIsChecked}
+              />
+            </div>
             <label htmlFor="password"> Clave:</label>
             <input
               type="password"
@@ -47,6 +65,8 @@ const ModalProfile = ({
               onChange={handleChange}
               placeholder="Ingrese un nuevo password si desea"
               autoComplete="on"
+              disabled={!passwordIsChecked}
+              hidden={!passwordIsChecked}
             />
           </div>
           <div className="form-group">

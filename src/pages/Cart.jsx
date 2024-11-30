@@ -2,7 +2,7 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { Link } from "react-router-dom"
-import config from "../api/vercel"
+import config, { fetchPrice } from "../api/vercel"
 import "../components/Layout.css"
 import { removeItemCart } from "../reducer/cartSlice"
 
@@ -13,20 +13,24 @@ const Cart = () => {
   const cartItems = useSelector(state => state.cart)
   const [price, setPrice] = useState(0)
   const { urlVercel } = config
+  const [loading, setLoading] = useState(false)
   const [error, setError] = useState(null)
 
-  useEffect(() => {
-    const fetchPrice = async () => {
-      try {
-        const response = await axios.get("https://ha-videoclub-api-g2.vercel.app/prices", {
-          params: { price_id: 2 },
-        })
-        setPrice(response.data.pricing[1].price)
-      } catch (error) {
-        console.error("Error al obtener el precio:", error)
-      }
+  const handleFetchPrice = async () => {
+    setLoading(true)
+    const { data, error } = await fetchPrice()
+    if (data) {
+      const { price } = data
+      setPrice(price)
     }
-    fetchPrice()
+    if (error) {
+      setError(error)
+    }
+    setLoading(false)
+  }
+
+  useEffect(() => {
+    handleFetchPrice()
   }, [])
 
   const totalPrice = price * cartItems.length
@@ -67,6 +71,10 @@ const Cart = () => {
     }
   }
 
+  if (loading) {
+    return <div>Cargndo el carrito...</div>
+  }
+
   return (
     <div className="main-contain">
       <h1 className="cart">Carrito</h1>
@@ -99,6 +107,7 @@ const Cart = () => {
           ))
         )}
       </div>
+      {error && <div>{error}</div>}
     </div>
   )
 }

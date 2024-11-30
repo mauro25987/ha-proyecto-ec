@@ -105,5 +105,47 @@ const updateProfile = async (token, userId, user) => {
   }
 }
 
-export { fetchProfile, loginUser, registerUser, updateProfile }
+const fetchPrice = async () => {
+  try {
+    const response = await axios({
+      method: "GET",
+      baseURL: urlVercel,
+      url: "/prices",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+    if (response.status === 200) {
+      return { data: response.data.pricing[1], error: null }
+    }
+  } catch (error) {
+    if (error.response) {
+      return { error: "Error: algo salio mal", data: null }
+    }
+  }
+}
+
+const sendOrder = async (token, data) => {
+  try {
+    const response = await axios({
+      method: "POST",
+      baseURL: urlVercel,
+      url: "/orders",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      data: data,
+    })
+    if (response.status === 200) {
+      return { data: "Orden procesada correctamente", error: null }
+    }
+  } catch (error) {
+    if (error.response) {
+      return { error: "Error: algo salio mal", data: null }
+    }
+  }
+}
+
+export { fetchPrice, fetchProfile, loginUser, registerUser, sendOrder, updateProfile }
 export default config
