@@ -1,6 +1,13 @@
 import { useState } from "react"
 
-const ModalProfile = ({ handleSubmitModal, handleChange, user, setShowModal, showModal }) => {
+const ModalProfile = ({
+  handleEditUser,
+  handleDelUser,
+  handleChange,
+  user,
+  setShowModal,
+  showModal,
+}) => {
   const [passwordIsChecked, setPasswordIsChecked] = useState(false)
   const { firstname, lastname, password, phone, email, address } = user
 
@@ -9,7 +16,8 @@ const ModalProfile = ({ handleSubmitModal, handleChange, user, setShowModal, sho
   }
 
   return (
-    <form onSubmit={handleSubmitModal}>
+    // <form onSubmit={e => e.preventDefault()}>
+    <form>
       <div className="modal-overlay">
         <div className="modal-content">
           <span className="cancel-button" onClick={() => setShowModal(!showModal)}>
@@ -96,10 +104,14 @@ const ModalProfile = ({ handleSubmitModal, handleChange, user, setShowModal, sho
             />
           </div>
           <div className="modal-actions">
-            <button className="save-button">Borrar Usuario</button>
+            <button type="button" className="save-button" onClick={handleDelUser}>
+              Borrar Usuario
+            </button>
           </div>
           <div className="modal-actions">
-            <button className="save-button">Guardar</button>
+            <button type="button" className="save-button" onClick={handleEditUser}>
+              Guardar
+            </button>
           </div>
         </div>
       </div>

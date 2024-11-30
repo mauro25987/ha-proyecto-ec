@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { fetchProfile, updateProfile } from "../api/vercel"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import { deleteUser, fetchProfile, updateProfile } from "../api/vercel"
 import "../components/Layout.css"
 import ModalProfile from "../components/ModalProfile"
+import { removeToken } from "../reducer/authSlice"
 import randomBanners from "../utils/randomBanner"
 import "./modal.css"
 
 const Profile = () => {
   const { token, userId } = useSelector(state => state.auth)
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
   const [showModal, setShowModal] = useState(false)
   const [error, setError] = useState(null)
   const [user, setUser] = useState({})
@@ -18,8 +22,7 @@ const Profile = () => {
     setUser({ ...user, [name]: value })
   }
 
-  const handleSubmitModal = e => {
-    e.preventDefault()
+  const handleEditUser = () => {
     const { firstname, lastname, password, phone, email, address } = user
     if (password === "") {
       setUser({ firstname, lastname, phone, email, address })
@@ -29,6 +32,21 @@ const Profile = () => {
     }
     handleUpdateProfile()
     setShowModal(!showModal)
+  }
+
+  const handleDelUser = async () => {
+    setLoading(true)
+    const { data, error } = await deleteUser(token, userId)
+    if (data) {
+      console.log(data)
+    }
+    if (error) {
+      setError(error)
+    }
+    setLoading(false)
+    setShowModal(!showModal)
+    dispatch(removeToken())
+    navigate("/")
   }
 
   const handleUpdateProfile = async () => {
@@ -79,7 +97,8 @@ const Profile = () => {
 
       {showModal && (
         <ModalProfile
-          handleSubmitModal={handleSubmitModal}
+          handleEditUser={handleEditUser}
+          handleDelUser={handleDelUser}
           handleChange={handleChange}
           user={user}
           setShowModal={setShowModal}

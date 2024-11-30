@@ -10,7 +10,7 @@ const Logout = () => {
 
   useEffect(() => {
     if (token) {
-      dispatch(removeToken(token))
+      dispatch(removeToken())
       navigate("/")
     }
   }, [dispatch, navigate, token])
