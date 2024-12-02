@@ -94,7 +94,22 @@ const Profile = () => {
       </button>
       <hr />
       <h3>Compras realizadas</h3>
-      {console.log(user)}
+      {user.orders.map(order => (
+        <div key={order.id}>
+          <h1>Numero de Orden: {order.id}</h1>
+          <p>
+            Peliculas compradas:
+            {order.movies.map(movie => (
+              <div key={movie.id}>
+                <p>
+                  Titulo: {movie.title} - Precio: {movie.price}
+                </p>
+              </div>
+            ))}
+          </p>
+          <p>Precio Total: </p>
+        </div>
+      ))}
 
       {showModal && (
         <ModalProfile

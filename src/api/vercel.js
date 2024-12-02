@@ -1,9 +1,5 @@
 import axios from "axios"
 
-const config = {
-  urlVercel: "https://ha-videoclub-api-g2.vercel.app",
-}
-
 const urlVercel = "https://ha-videoclub-api-g2.vercel.app"
 
 const registerUser = async user => {
@@ -170,4 +166,3 @@ const sendOrder = async (token, order) => {
 }
 
 export { deleteUser, fetchPrice, fetchProfile, loginUser, registerUser, sendOrder, updateProfile }
-export default config
