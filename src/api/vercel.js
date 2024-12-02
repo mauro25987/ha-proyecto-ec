@@ -137,7 +137,7 @@ const fetchPrice = async () => {
       },
     })
     if (response.status === 200) {
-      return { data: response.data.pricing[1], error: null }
+      return { data: response.data.pricing[1].price, error: null }
     }
   } catch (error) {
     if (error.response) {
