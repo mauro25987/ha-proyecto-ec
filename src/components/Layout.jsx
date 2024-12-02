@@ -1,11 +1,14 @@
 import { Nav, Navbar } from "react-bootstrap"
 import { FaShoppingCart } from "react-icons/fa"
-import { useSelector } from "react-redux"
-import { NavLink, Outlet } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { NavLink, Outlet, useNavigate } from "react-router-dom"
 
+import { removeToken } from "../reducer/authSlice"
 import "./Layout.css"
 
 const Layout = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const { isAuthenticated, userId } = useSelector(state => state.auth)
   const cartCount = useSelector(state => state.cart.length)
 
@@ -14,9 +17,15 @@ const Layout = () => {
       <NavLink to={`profile/${userId}`}>
         <p>Perfil</p>
       </NavLink>
-      <NavLink to="logout">
+      <button
+        type="button"
+        onClick={() => {
+          dispatch(removeToken())
+          navigate("/")
+        }}
+      >
         <p>Logout</p>
-      </NavLink>
+      </button>
     </>
   )
 
