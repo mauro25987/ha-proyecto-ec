@@ -146,7 +146,8 @@ const fetchPrice = async () => {
   }
 }
 
-const sendOrder = async (token, data) => {
+const sendOrder = async (token, order) => {
+  console.log(order)
   try {
     const response = await axios({
       method: "POST",
@@ -156,7 +157,7 @@ const sendOrder = async (token, data) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      data: data,
+      data: order,
     })
     if (response.status === 200) {
       return { data: "Orden procesada correctamente", error: null }

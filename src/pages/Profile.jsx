@@ -94,6 +94,7 @@ const Profile = () => {
       </button>
       <hr />
       <h3>Compras realizadas</h3>
+      {console.log(user)}
 
       {showModal && (
         <ModalProfile
