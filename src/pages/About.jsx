@@ -1,6 +1,5 @@
-import React from "react"
-import "../components/Layout.css"
 import { FaLinkedin } from "react-icons/fa"
+import "../components/Layout.css"
 
 const About = () => {
   return (

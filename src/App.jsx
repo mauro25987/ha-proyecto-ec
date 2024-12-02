@@ -1,5 +1,6 @@
+import "bootstrap/dist/js/bootstrap.bundle.min"
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import Layout from "./components/Layout"
+import { Layout } from "./components/index"
 import {
   About,
   Cart,
@@ -8,11 +9,10 @@ import {
   Login,
   Logout,
   Movie,
+  Order,
   Profile,
   Register,
-  Order,
 } from "./pages/index"
-import "bootstrap/dist/js/bootstrap.bundle.min"
 
 const router = createBrowserRouter(
   [

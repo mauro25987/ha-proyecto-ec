@@ -91,12 +91,12 @@ const fetchMovie = async id => {
   }
 }
 
-const searchMovie = async movie => {
+const searchMovie = async search => {
   try {
     const response = await axios({
       method: "GET",
       url: `${urlTmdb}/search/movie`,
-      params: { include_adult: "false", language: "en-US", page: "1", query: movie },
+      params: { include_adult: "false", language: "en-US", page: "1", query: search },
       headers: {
         accept: "application/json",
         Authorization: `Bearer ${apiKey}`,
