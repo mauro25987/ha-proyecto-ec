@@ -3,7 +3,7 @@ import { useDispatch } from "react-redux"
 import { Link, useNavigate } from "react-router-dom"
 import { addItemCart } from "../reducer/cartSlice"
 
-const MovieCard = ({ movie }) => {
+const MovieCardSearch = ({ movie }) => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const { id, title, poster_path } = movie
@@ -17,7 +17,6 @@ const MovieCard = ({ movie }) => {
     )
     navigate("/")
   }
-
   return (
     <div className="movie-cards">
       <h2 className="movie-title">{title}</h2>
@@ -37,4 +36,5 @@ const MovieCard = ({ movie }) => {
     </div>
   )
 }
-export default MovieCard
+
+export default MovieCardSearch

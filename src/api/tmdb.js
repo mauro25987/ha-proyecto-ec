@@ -5,14 +5,14 @@ const config = {
 }
 
 const apiKey = import.meta.env.VITE_API_KEY
-const urlTmdb = "https://api.themoviedb.org/3/movie"
+const urlTmdb = "https://api.themoviedb.org/3"
 
 const fetchMovies = async () => {
   try {
     const [popular, top_rated, now_playing, upcoming] = await axios.all([
       axios({
         method: "GET",
-        url: `${urlTmdb}/popular`,
+        url: `${urlTmdb}/movie/popular`,
         params: { language: "en-US", page: "1" },
         headers: {
           accept: "application/json",
@@ -21,7 +21,7 @@ const fetchMovies = async () => {
       }),
       axios({
         method: "GET",
-        url: `${urlTmdb}/top_rated`,
+        url: `${urlTmdb}/movie/top_rated`,
         params: { language: "en-US", page: "1" },
         headers: {
           accept: "application/json",
@@ -30,7 +30,7 @@ const fetchMovies = async () => {
       }),
       axios({
         method: "GET",
-        url: `${urlTmdb}/now_playing`,
+        url: `${urlTmdb}/movie/now_playing`,
         params: { language: "en-US", page: "1" },
         headers: {
           accept: "application/json",
@@ -39,7 +39,7 @@ const fetchMovies = async () => {
       }),
       axios({
         method: "GET",
-        url: `${urlTmdb}/upcoming`,
+        url: `${urlTmdb}/movie/upcoming`,
         params: { language: "en-US", page: "1" },
         headers: {
           accept: "application/json",
@@ -74,7 +74,7 @@ const fetchMovie = async id => {
   try {
     const response = await axios({
       method: "GET",
-      url: `${urlTmdb}/${id}`,
+      url: `${urlTmdb}/movie/${id}`,
       params: { language: "en-US" },
       headers: {
         accept: "application/json",
@@ -91,5 +91,26 @@ const fetchMovie = async id => {
   }
 }
 
+const searchMovie = async movie => {
+  try {
+    const response = await axios({
+      method: "GET",
+      url: `${urlTmdb}/search/movie`,
+      params: { include_adult: "false", language: "en-US", page: "1", query: movie },
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${apiKey}`,
+      },
+    })
+    if (response.status === 200) {
+      return { data: response.data.results, error: null }
+    }
+  } catch (error) {
+    if (error.response) {
+      return { error: "Error: algo salio mal", data: null }
+    }
+  }
+}
+
 export default config
-export { fetchMovie, fetchMovies }
+export { fetchMovie, fetchMovies, searchMovie }
