@@ -51,8 +51,15 @@ const Layout = () => {
               width="30"
               height="30"
               className="d-inline-block align-top"
-            />{" "}
+            />
           </a>
+          <img
+            src="https://www.stremio.com/website/stremio-txt-logo-small.png"
+            alt="Logo"
+            width="200"
+            height="30"
+            className="d-inline-block align-top"
+          />
           <Navbar.Toggle aria-controls="navbarNavDropdown" />
           <div className="collapse navbar-collapse" id="navbarNavDropdown">
             <ul className="navbar-nav ms-auto">

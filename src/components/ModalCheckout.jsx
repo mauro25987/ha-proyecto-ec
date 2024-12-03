@@ -38,10 +38,11 @@ const ModalCheckout = () => {
 
   return (
     <div>
-      ModalCheckout
       <form onSubmit={handleSendOrder}>
-        <div>Medios de pago:</div>
         <div>
+          <strong>Medios de pago :</strong>
+        </div>
+        <div className="pagos">
           <label htmlFor="visa">Visa</label>
           <input
             type="radio"
@@ -52,7 +53,7 @@ const ModalCheckout = () => {
             checked={payMethod === "visa"}
           />
         </div>
-        <div>
+        <div className="pagos">
           <label htmlFor="master">Master Card</label>
           <input
             type="radio"
@@ -63,7 +64,7 @@ const ModalCheckout = () => {
             checked={payMethod === "master"}
           />
         </div>
-        <div>
+        <div className="pagos">
           <label htmlFor="mercadopago">Mercado Pago</label>
           <input
             type="radio"
@@ -75,7 +76,7 @@ const ModalCheckout = () => {
           />
         </div>
         <div>
-          <button>Comprar</button>
+          <button className="button-buy">Comprar</button>
         </div>
       </form>
       {error && <div>{error}</div>}

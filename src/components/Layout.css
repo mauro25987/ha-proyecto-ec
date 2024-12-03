@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
 
 .navbar-logo img {
   height: 40px;
@@ -101,7 +104,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(0, 0, 0, 0.1);
   padding: 20px;
   border-radius: 10px;
   max-width: 600px;
@@ -310,6 +313,10 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 5px;
+}
+.collaborator-name {
+  text-align: center;
 }
 .about {
   grid-column: 1 / -1;
@@ -320,10 +327,9 @@ body {
 }
 
 .collaborator-image {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  margin-bottom: 10px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
 }
 
 .link-logo {
@@ -350,6 +356,14 @@ body {
 .button {
   background-color: yellow;
   padding: 5px;
+  border: none;
+
+  border: none;
+  border-radius: 20px;
+  padding: 10px 15px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
 }
 
 .cart-home {
@@ -367,4 +381,71 @@ body {
   padding: 2px 6px;
   font-size: 12px;
   font-weight: bold;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px auto;
+  gap: 10px;
+}
+.search-bar {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px 15px;
+  font-size: 16px;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+  transition: border-color 0.3s ease;
+}
+
+.pagos {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.pagos label {
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.pagos input[type="radio"] {
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 20px;
+
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px;
+  margin: auto;
+}
+
+.button-buy {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.modal-buy {
+  background-color: #4caf50;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+
+  margin-left: 20px;
 }

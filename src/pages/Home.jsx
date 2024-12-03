@@ -58,11 +58,11 @@ const Home = () => {
   return (
     <div className="main-contain">
       <section>
-        <div>
+        <div className="search">
           <label htmlFor="search"></label>
           <input
             type="text"
-            id="search"
+            className="search-bar"
             name="search"
             value={search}
             onChange={handleSearch}

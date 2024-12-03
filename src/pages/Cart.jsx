@@ -62,6 +62,11 @@ const Cart = () => {
     <div className="main-contain">
       <h1 className="cart">Carrito</h1>
 
+      <h4 className="cart">Precio total: {totalPrice}</h4>
+
+      <button onClick={handleShowModalCheckout} className="modal-buy">
+        Finalizar compra
+      </button>
       <hr />
 
       <div className="movie-list">
@@ -69,7 +74,6 @@ const Cart = () => {
           <h2 className="cart">El carrito se encuentra actualmente vacio</h2>
         ) : (
           <>
-            <h4 className="cart">Precio total: {totalPrice}</h4>
             {cart.map(movie => (
               <div key={movie.idCart} className="movie-cart">
                 <h3>{movie.title}</h3>
@@ -84,9 +88,6 @@ const Cart = () => {
                 <br />
               </div>
             ))}
-            <button className="cart" onClick={handleShowModalCheckout}>
-              Comprar
-            </button>
           </>
         )}
       </div>

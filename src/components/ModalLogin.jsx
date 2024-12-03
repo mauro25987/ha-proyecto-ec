@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom"
 import { loginUser } from "../api/vercel"
 import "../components/Layout.css"
 import { setToken } from "../reducer/authSlice"
+import "../components/Layout.css"
 
 function ModalLogin({ showModaLogin, SetShowModaLogin, handleBackToCart }) {
   const navigate = useNavigate()

@@ -81,15 +81,14 @@ const Profile = () => {
 
   return (
     <div style={{ padding: "20px", textAlign: "center", marginTop: "60px" }}>
-      <img src={randomBanners()} className="banner" />
-      <h1>Perfil </h1>
+      <img src={randomBanners()} className="banner" />{" "}
       <h2>
         Bienvenido {user.firstname} {user.lastname}
       </h2>
       <p>Email: {user.email}</p>
       <p>Telefono: {user.phone}</p>
       <p>Direccion: {user.address}</p>
-      <button style={{ cursor: "pointer" }} onClick={() => setShowModal(!showModal)}>
+      <button className="button" onClick={() => setShowModal(!showModal)}>
         Editar Perfil
       </button>
       <hr />
@@ -108,9 +107,9 @@ const Profile = () => {
             ))}
           </p>
           <p>Precio Total: </p>
+          <hr />
         </div>
       ))}
-
       {showModal && (
         <ModalProfile
           handleEditUser={handleEditUser}

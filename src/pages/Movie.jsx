@@ -62,7 +62,9 @@ function Movie() {
         </h2>
 
         <p>{selectedMovie.release_date}</p>
-        <p>{selectedMovie.overview}</p>
+        <strong>
+          <p>{selectedMovie.overview}</p>
+        </strong>
         <button className="button" onClick={handleAddCart}>
           Añadir al carrito
         </button>
