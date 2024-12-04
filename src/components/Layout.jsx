@@ -1,4 +1,4 @@
-import { Nav, Navbar } from "react-bootstrap"
+import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap"
 import { FaShoppingCart } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, Outlet, useNavigate } from "react-router-dom"
@@ -14,37 +14,37 @@ const Layout = () => {
 
   const isUserAuthenticated = (
     <>
-      <NavLink to={`profile/${userId}`}>
-        <p>Perfil</p>
-      </NavLink>
-      <button
-        type="button"
+      <Nav.Link as={NavLink} to={`profile/${userId}`}>
+        Perfil
+      </Nav.Link>
+      <Nav.Link
+        as="button"
         onClick={() => {
           dispatch(removeToken())
           navigate("/")
         }}
       >
-        <p>Logout</p>
-      </button>
+        Logout
+      </Nav.Link>
     </>
   )
 
   const isUserNotAuthenticated = (
     <>
-      <NavLink to="login">
+      <Nav.Link as={NavLink} to="login">
         <p>Login</p>
-      </NavLink>
-      <NavLink to="register">
+      </Nav.Link>
+      <Nav.Link as={NavLink} to="register">
         <p>Registro</p>
-      </NavLink>
+      </Nav.Link>
     </>
   )
 
   return (
     <div>
-      <nav className="navbar  border-body navbar-expand-md" data-bs-theme="dark">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="/">
+      <Navbar bg="dark" variant="dark" expand="md" className="border-body">
+        <Container fluid>
+          <Navbar.Brand href="/">
             <img
               src="https://stremio.github.io/stremio-addon-guide/img/favicon.png"
               alt="Logo"
@@ -52,58 +52,44 @@ const Layout = () => {
               height="30"
               className="d-inline-block align-top"
             />
-          </a>
-          <img
-            src="https://www.stremio.com/website/stremio-txt-logo-small.png"
-            alt="Logo"
-            width="200"
-            height="30"
-            className="d-inline-block align-top"
-          />
+
+            <img
+              src="https://www.stremio.com/website/stremio-txt-logo-small.png"
+              alt="Logo"
+              width="200"
+              height="30"
+              className="d-inline-block align-top"
+            />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarNavDropdown" />
-          <div className="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul className="navbar-nav ms-auto">
-              <li className="nav-item">
-                <Nav.Link as={NavLink} to="/">
-                  Home
-                </Nav.Link>
-              </li>
-              <li className="nav-item">
-                <Nav.Link as={NavLink} to="about">
-                  About
-                </Nav.Link>
-              </li>
-              <li className="nav-item">
-                <Nav.Link as={NavLink} to="cart">
-                  <FaShoppingCart />
-                  {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
-                </Nav.Link>
-              </li>
-              <li className="nav-item dropdown">
-                <a
-                  className="nav-link dropdown-toggle"
-                  id="NavbarDropdown"
-                  href="#"
-                  role="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Opciones
-                </a>
-                <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-                  <li>
-                    {isAuthenticated ? (
-                      <Nav.Link>{isUserAuthenticated}</Nav.Link>
-                    ) : (
-                      <Nav.Link>{isUserNotAuthenticated}</Nav.Link>
-                    )}
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
+          <Navbar.Collapse id="navbarNavDropdown">
+            <Nav className="ms-auto">
+              <Nav.Link as={NavLink} to="/">
+                Home
+              </Nav.Link>
+
+              <Nav.Link as={NavLink} to="about">
+                About
+              </Nav.Link>
+
+              <Nav.Link as={NavLink} to="cart">
+                <FaShoppingCart />
+                {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
+              </Nav.Link>
+
+              <NavDropdown title="Opciones" id="navbarDropdown">
+                <li>
+                  {isAuthenticated ? (
+                    <Nav.Link>{isUserAuthenticated}</Nav.Link>
+                  ) : (
+                    <Nav.Link>{isUserNotAuthenticated}</Nav.Link>
+                  )}
+                </li>
+              </NavDropdown>
+            </Nav>
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
 
       <Outlet />
 
