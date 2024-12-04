@@ -27,8 +27,17 @@ function Movie() {
     setLoading(true)
     const { data, error } = await fetchMovie(id)
     if (data) {
-      const { release_date, title, overview, backdrop_path, poster_path } = data
-      setSelectedMovie({ id, title, release_date, overview, backdrop_path, poster_path })
+      const { release_date, title, overview, backdrop_path, poster_path, genres, runtime } = data
+      setSelectedMovie({
+        id,
+        title,
+        release_date,
+        overview,
+        backdrop_path,
+        poster_path,
+        genres: genres[0].name,
+        runtime,
+      })
     }
     if (error) {
       setError(error)
@@ -53,18 +62,18 @@ function Movie() {
         }}
       ></div>
       <div className="movie-info">
-        <h2
-          style={{
-            marginTop: "80px",
-          }}
-        >
-          {selectedMovie.title}
-        </h2>
+        <h2>{selectedMovie.title}</h2>
+        <div className="info d-flex justify-content-around">
+          <p>{selectedMovie.release_date}</p>
+          <p>{selectedMovie.genres}</p>
+          <p>
+            {`${Math.floor(selectedMovie.runtime / 60)}h  ${selectedMovie.runtime % 60}m 
+            `}
+          </p>
+        </div>
 
-        <p>{selectedMovie.release_date}</p>
-        <strong>
-          <p>{selectedMovie.overview}</p>
-        </strong>
+        <p>{selectedMovie.overview}</p>
+
         <button className="button" onClick={handleAddCart}>
           Añadir al carrito
         </button>

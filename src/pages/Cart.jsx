@@ -32,10 +32,6 @@ const Cart = () => {
     dispatch(removeItemCart(idCart))
   }
 
-  const handleBackToCart = () => {
-    SetShowModaLogin(!showModaLogin)
-  }
-
   const handleShowModalCheckout = () => {
     if (isAuthenticated) {
       console.log("compraste")
@@ -76,7 +72,7 @@ const Cart = () => {
           <>
             {cart.map(movie => (
               <div key={movie.idCart} className="movie-cart">
-                <h3>{movie.title}</h3>
+                <h3 className="title">{movie.title}</h3>
                 <img
                   src={`https://image.tmdb.org/t/p/original/${movie.image}`}
                   alt=""
@@ -93,11 +89,7 @@ const Cart = () => {
       </div>
 
       {showModaLogin && (
-        <ModalLogin
-          showModaLogin={showModaLogin}
-          SetShowModaLogin={SetShowModaLogin}
-          handleBackToCart={handleBackToCart}
-        />
+        <ModalLogin showModaLogin={showModaLogin} SetShowModaLogin={SetShowModaLogin} />
       )}
 
       {showModalCheckout && <ModalCheckout />}

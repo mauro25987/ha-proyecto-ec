@@ -55,7 +55,7 @@ const About = () => {
             </div>
           </div>
           <div className="col-3">
-            <h5 className="collaborator-name">Mateo Barragan</h5>
+            <h5 className="collaborator-name">Mateo Barreiro</h5>
 
             <div className="card-body">
               <div className="collaborator-card">
