@@ -82,6 +82,28 @@ const ModalCheckout = () => {
             checked={payMethod === "mercadopago"}
           />
         </div>
+        <div className="pagos">
+          <label htmlFor="maestro">Maestro</label>
+          <input
+            type="radio"
+            id="maestro"
+            name="pay"
+            value="maestro"
+            onChange={handleSetPayMethod}
+            checked={payMethod === "maestro"}
+          />
+        </div>
+        <div className="pagos">
+          <label htmlFor="americanExpress">American Express</label>
+          <input
+            type="radio"
+            id="americanExpress"
+            name="pay"
+            value="americanExpress"
+            onChange={handleSetPayMethod}
+            checked={payMethod === "americanExpress"}
+          />
+        </div>
         <div>
           <button className="button-buy">Comprar</button>
         </div>
