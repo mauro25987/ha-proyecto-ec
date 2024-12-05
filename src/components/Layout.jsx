@@ -1,4 +1,4 @@
-import { Nav, Navbar, NavDropdown, Container } from "react-bootstrap"
+import { Container, Nav, Navbar, NavDropdown } from "react-bootstrap"
 import { FaShoppingCart } from "react-icons/fa"
 import { useDispatch, useSelector } from "react-redux"
 import { NavLink, Outlet, useNavigate } from "react-router-dom"
@@ -42,7 +42,7 @@ const Layout = () => {
 
   return (
     <div>
-      <Navbar bg="dark" variant="dark" expand="md" className="border-body">
+      <Navbar variant="dark" expand="md">
         <Container fluid>
           <Navbar.Brand href="/">
             <img
@@ -59,9 +59,11 @@ const Layout = () => {
               width="200"
               height="30"
               className="d-inline-block align-top"
+              style={{ marginLeft: "20px" }}
             />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="navbarNavDropdown" />
+
           <Navbar.Collapse id="navbarNavDropdown">
             <Nav className="ms-auto">
               <Nav.Link as={NavLink} to="/">
@@ -77,14 +79,12 @@ const Layout = () => {
                 {cartCount > 0 && <span className="cart-count">{cartCount}</span>}
               </Nav.Link>
 
-              <NavDropdown title="Opciones" id="navbarDropdown">
-                <li>
-                  {isAuthenticated ? (
-                    <Nav.Link>{isUserAuthenticated}</Nav.Link>
-                  ) : (
-                    <Nav.Link>{isUserNotAuthenticated}</Nav.Link>
-                  )}
-                </li>
+              <NavDropdown menuVariant="dark" title="Opciones" id="navbarDropdown">
+                {isAuthenticated ? (
+                  <Nav.Link>{isUserAuthenticated}</Nav.Link>
+                ) : (
+                  <Nav.Link>{isUserNotAuthenticated}</Nav.Link>
+                )}
               </NavDropdown>
             </Nav>
           </Navbar.Collapse>

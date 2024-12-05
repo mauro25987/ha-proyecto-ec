@@ -87,7 +87,11 @@ function ModalLogin({ showModaLogin, SetShowModaLogin }) {
                 </div>
                 <div className="log">
                   <button type="submit">Login</button>
-                  <button type="button" onClick={() => SetShowModaLogin(false)}>
+                  <button
+                    type="button"
+                    className="btn-back"
+                    onClick={() => SetShowModaLogin(false)}
+                  >
                     Volver atras
                   </button>
                 </div>

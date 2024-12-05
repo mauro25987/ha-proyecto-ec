@@ -56,18 +56,18 @@ const Cart = () => {
 
   return (
     <div className="main-contain">
-      <h1 className="cart">Carrito</h1>
+      <h1 className="cart">Carrito de Compras</h1>
 
-      <h4 className="cart">Precio total: {totalPrice}</h4>
+      <h4 className="cart">Precio Total: {totalPrice}</h4>
 
       <button onClick={handleShowModalCheckout} className="modal-buy">
-        Finalizar compra
+        Finalizar Compra
       </button>
       <hr />
 
       <div className="movie-list">
         {cart.length === 0 ? (
-          <h2 className="cart">El carrito se encuentra actualmente vacio</h2>
+          <h2 className="cart">El carrito se encuentra actualmente vacío</h2>
         ) : (
           <>
             {cart.map(movie => (
@@ -78,7 +78,10 @@ const Cart = () => {
                   alt=""
                   className="movie-image"
                 />
-                <button className="button" onClick={() => handleRemoveFromCart(movie.idCart)}>
+                <button
+                  className="button-delete"
+                  onClick={() => handleRemoveFromCart(movie.idCart)}
+                >
                   Eliminar del carrito
                 </button>
                 <br />

@@ -16,7 +16,6 @@ const ModalProfile = ({
   }
 
   return (
-    // <form onSubmit={e => e.preventDefault()}>
     <form>
       <div className="modal-overlay">
         <div className="modal-content">

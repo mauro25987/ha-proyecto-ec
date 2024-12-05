@@ -39,6 +39,13 @@ const ModalCheckout = () => {
   return (
     <div>
       <form onSubmit={handleSendOrder}>
+        <img
+          src="https://cdn.shoplightspeed.com/shops/620181/files/21684688/mercadopago-credit-card-logo-bis.png"
+          alt="Logo"
+          width="100%"
+          height="100%"
+          className="d-inline-block align-top"
+        />
         <div>
           <strong>Medios de pago :</strong>
         </div>

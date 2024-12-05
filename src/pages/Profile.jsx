@@ -73,6 +73,10 @@ const Profile = () => {
 
   useEffect(() => {
     handleFetchProfile()
+    /* 
+      setTotalPrice((valorAnt) => valorAnt + movie.price)
+
+    */
   }, [])
 
   if (loading) {
@@ -93,23 +97,26 @@ const Profile = () => {
       </button>
       <hr />
       <h3>Compras realizadas</h3>
-      {user.orders.map(order => (
-        <div key={order.id}>
-          <h1>Numero de Orden: {order.id}</h1>
-          <p>
-            Peliculas compradas:
-            {order.movies.map(movie => (
-              <div key={movie.id}>
-                <p>
-                  Titulo: {movie.title} - Precio: {movie.price}
-                </p>
-              </div>
-            ))}
-          </p>
-          <p>Precio Total: </p>
-          <hr />
-        </div>
-      ))}
+      {user.orders.map(order => {
+        const totalPrice = order.movies.reduce((acc, movie) => acc + parseInt(movie.price), 0)
+        return (
+          <div key={order.id}>
+            <h1>Numero de Orden: {order.id}</h1>
+            <p>
+              Peliculas compradas:
+              {order.movies.map(movie => (
+                <div key={movie.id}>
+                  <span>
+                    Titulo: {movie.title} - Precio: $ {movie.price}
+                  </span>
+                </div>
+              ))}
+            </p>
+            <p>Precio Total: $ {totalPrice}</p>
+            <hr />
+          </div>
+        )
+      })}
       {showModal && (
         <ModalProfile
           handleEditUser={handleEditUser}
