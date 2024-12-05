@@ -84,17 +84,28 @@ const Profile = () => {
   }
 
   return (
-    <div style={{ padding: "20px", textAlign: "center", marginTop: "60px" }}>
-      <img src={randomBanners()} className="banner" />{" "}
+    <div className="profile-contain">
+      <img src={randomBanners()} className="banner" />
+      <div className="profile-card">
+        <img
+          src="https://e0.pxfuel.com/wallpapers/373/168/desktop-wallpaper-goku-super-saiyan-silver-mastered-ultra-instinct-forum-avatar.jpg"
+          alt="avatar"
+          className="avatar"
+        />
+      </div>
+
       <h2>
         Bienvenido {user.firstname} {user.lastname}
       </h2>
-      <p>Email: {user.email}</p>
-      <p>Telefono: {user.phone}</p>
-      <p>Direccion: {user.address}</p>
-      <button className="button" onClick={() => setShowModal(!showModal)}>
+      <div className="info">
+        <p>Email: {user.email}</p>
+        <p>Telefono: {user.phone}</p>
+        <p>Direccion: {user.address}</p>
+      </div>
+      <button className="edit-button" onClick={() => setShowModal(!showModal)}>
         Editar Perfil
       </button>
+
       <hr />
       <h3>Compras realizadas</h3>
       {user.orders.map(order => {
